@@ -30,7 +30,6 @@ const AddFoodTruck = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		// Write your POST fetch() or axios() request here
 		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks`, newFoodTruck)
             .then(() => {
                 console.log(newFoodTruck)
@@ -45,14 +44,14 @@ const AddFoodTruck = () => {
         <div>
             <h1>add a food truck</h1>
             <form className='add-truck-form' onSubmit={handleSubmit}>
-                <label>Food Truck Name</label>
+                <label htmlFor='foodtruck-name'>Food Truck Name</label>
                 <input
                     onChange={handleChange}
                     id='name'
                     placeholder='Food Truck Name'
                     value={newFoodTruck.name}
                 />
-                <label htmlFor='Address'>Location</label>
+                <label htmlFor='address'>Location</label>
                 <input
                     onChange={handleChange}
                     id='location'
@@ -62,21 +61,21 @@ const AddFoodTruck = () => {
                 <label>Menu Item</label>
                 <input
                     onChange={handleChange}
-                    id='????'
+                    id='menu.name'
                     placeholder='Name'
-                    value={newFoodTruck.menu[0].name}
+                    defaultValue={newFoodTruck.menu.name}
                     />
                 <input
                     onChange={handleChange}
                     id='price'
                     placeholder='Price'
-                    value={newFoodTruck.menu.price}
+                    defaultValue={newFoodTruck.menu.price}
                     />
                 <input
                     onChange={handleChange}
                     id='description'
                     placeholder='Description'
-                    value={newFoodTruck.menu.description}
+                    defaultValue={newFoodTruck.menu.description}
                 />
                 <button type='submit'>Submit</button>
             </form>
