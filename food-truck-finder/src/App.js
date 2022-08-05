@@ -4,6 +4,7 @@ import FoodTruck from './components/FoodTruck'
 import { Routes, Route } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
 
+
 function App() {
 
   //create nav and links with react router
