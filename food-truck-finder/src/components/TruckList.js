@@ -13,6 +13,7 @@ const TruckList = () => {
             })
     }, []);
 
+    
     return (
         <div>
             this page will display the map with food truck locations with card components for each food truck
