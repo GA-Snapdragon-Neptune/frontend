@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Reviews from './Reviews';
 import Menu from './Menu'
-import Info from './Info'
 import './foodtruck.css'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -34,9 +33,6 @@ const FoodTruck = () => {
     
     return (
         <div>
-            <nav>
-                nav bar
-            </nav>
 
             <div>Food truck images carousel</div>
                 <div className='food-truck-container'>
