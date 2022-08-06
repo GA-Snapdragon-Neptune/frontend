@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       nav bar
       <Routes>
-				<Route path='/' element={<AddFoodTruck />}/>
+				<Route path='/' />
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
 			</Routes>
