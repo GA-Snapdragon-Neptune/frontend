@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import AddFoodTruck from './AddFoodTruck';
 
 const TruckList = () => {
     const [foodTruckList, setFoodTruckList] = useState([])
@@ -22,6 +23,7 @@ const TruckList = () => {
                     <Link to={foodtruck._id}>{foodtruck.name}</Link>
                 </div>
             ))}
+            <AddFoodTruck />
         </div>
     );
 };

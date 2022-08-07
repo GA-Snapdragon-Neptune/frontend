@@ -8,13 +8,7 @@ const AddFoodTruck = () => {
     const [newFoodTruck, setNewFoodTruck] = useState({
         name: '',
         location: '',
-        menu: [
-            {
-                name: '',
-                price: 0,
-                description: '',
-            }
-        ]
+        menu: [{}]
     })
 
     //add functionality to add additional menu items
@@ -24,9 +18,34 @@ const AddFoodTruck = () => {
     //     setMenuItem(menuItem + 1);
     // }
 
+
     const handleChange = (event) => {
 		setNewFoodTruck({ ...newFoodTruck, [event.target.id]: event.target.value });
-	};
+    };
+    
+    const handleMenuChange = (event) => {
+        setNewFoodTruck(current => {
+            const menu = { ...current.menu }
+            menu.name = event.target.value
+            return {...current, menu}
+        })
+    }
+
+    const handlePrice = (event) => {
+        setNewFoodTruck(current => {
+            const menu = { ...current.menu }
+            menu.price = event.target.value
+            return { ...current, menu}
+        })
+    }
+    const handleDescription = (event) => {
+        setNewFoodTruck(current => {
+            const menu = { ...current.menu }
+            menu.description = event.target.value
+            return { ...current, menu}
+        })
+        console.log(newFoodTruck)
+    }
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -37,7 +56,8 @@ const AddFoodTruck = () => {
 			
 		}
 		)
-	};
+    };
+    
 
 
     return (
@@ -60,19 +80,19 @@ const AddFoodTruck = () => {
                 />
                 <label>Menu Item</label>
                 <input
-                    onChange={handleChange}
-                    id='menu.name'
+                    onChange={handleMenuChange}
+                    // id='menu.name'
                     placeholder='Name'
-                    defaultValue={newFoodTruck.menu.name}
+                    value={newFoodTruck.menu.name}
                     />
                 <input
-                    onChange={handleChange}
+                    onChange={handlePrice}
                     id='price'
                     placeholder='Price'
                     defaultValue={newFoodTruck.menu.price}
                     />
                 <input
-                    onChange={handleChange}
+                    onChange={handleDescription}
                     id='description'
                     placeholder='Description'
                     defaultValue={newFoodTruck.menu.description}
