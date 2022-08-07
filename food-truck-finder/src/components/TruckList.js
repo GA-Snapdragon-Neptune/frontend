@@ -29,6 +29,10 @@ const TruckList = () => {
 
     return (
         <div>
+            <ul>
+          <li>grubtruck: link to /home</li>
+          <li>user profile</li>
+        </ul>
             this page will display the map with food truck locations with card components for each food truck
             {foodTruckList.map((foodtruck) => (
                 <div key={foodtruck._id}>

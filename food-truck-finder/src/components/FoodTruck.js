@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Reviews from './Reviews';
 import Menu from './Menu'
-import './foodtruck.css'
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
