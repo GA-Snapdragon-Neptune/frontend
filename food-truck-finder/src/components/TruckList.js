@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import AddFoodTruck from './AddFoodTruck';
+import FoodTruck from './FoodTruck';
+import usePlacesAutocomplete, {
+    getGeocode,
+    getLatLng,
+  } from "use-places-autocomplete";
 
 const TruckList = () => {
     const [foodTruckList, setFoodTruckList] = useState([])
@@ -14,13 +19,21 @@ const TruckList = () => {
             })
     }, []);
 
-    
+    const addresses = [{}]
+
+    foodTruckList.map((foodtruck) => {
+        addresses.push(foodtruck.location)
+        console.log(addresses)
+    })
+
+
     return (
         <div>
             this page will display the map with food truck locations with card components for each food truck
             {foodTruckList.map((foodtruck) => (
                 <div key={foodtruck._id}>
                     <Link to={foodtruck._id}>{foodtruck.name}</Link>
+                    <p>{foodtruck.location}</p>
                 </div>
             ))}
             <AddFoodTruck />

@@ -1,38 +1,67 @@
-import { useRef, useState, useEffect } from 'react';
-import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import { fontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
-//username/password regex?
+import { useState } from 'react';
+import axios from 'axios';
 
 const Register = () => {
+    const [newConsumerUser, setNewConsumerUser] = useState({
+        username: '',
+        email: '',
+        password: '',
+        consumer: true,
+        business: false,
+    })
 
-    const userRef = useRef()
-    const errRef = useRef()
+    const handleChange = (event) => {
+        setNewConsumerUser({...newConsumerUser, [event.target.id]: event.target.value})
+    }
 
-    const [user, setUser] = useState('')
-    const [validName, setValidName] = useState(false)
-    const [userFocus, setUserFocus] = useState(false)
-
-    const [pwd, setPwd] = useState('');
-    const [validPwd, setValidPwd] = useState(false);
-    const [pwdFocus, setPwdFocus] = useState(false);
-
-    const [matchPwd, setMatchPwd] = useState('');
-    const [validMatch, setValidMatch] = useState(false);
-    const [matchFocus, setMatchFocus] = useState(false);
-
-    const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-
-    useEffect(() => {
-        userRef.current.focus()
-    }, [])
+    const handleSubmit = (event) => {
+		event.preventDefault();
+		axios.post(`https://young-anchorage-22001.herokuapp.com/users/signup`)
+            .then((res) => {
+                console.log(res, newConsumerUser)
+		}
+		)
+    };
 
     return (
         <div>
+            <form onSubmit={handleSubmit}>
+                <h1>New User</h1>
+                <label>username</label>
+                <input
+                    type='text'
+                    onChange={handleChange}
+                    id='username'
+                    value={newConsumerUser.username}
+                 />
+                <label>email</label>
+                <input
+                    type='text'
+                    onChange={handleChange}
+                    id='email'
+                    value={newConsumerUser.email}
+                />
+                <label>password</label>
+                <input
+                    type='text'
+                    onChange={handleChange}
+                    id='password'
+                    value={newConsumerUser.password}
+                />
+
+                <button>Sign Up</button>
+           </form>
+
             
+                <h1>Returning User</h1>
+                <label>username</label>
+                <input type='text' />
+                <label>password</label>
+                <input type='text' />
+                <button>login</button>
+
         </div>
     );
 };
 
-// export default Register;
+export default Register;
