@@ -23,7 +23,7 @@ const TruckList = () => {
 
     foodTruckList.map((foodtruck) => {
         addresses.push(foodtruck.location)
-        console.log(addresses)
+        // console.log(addresses)
     })
 
 

@@ -24,13 +24,29 @@ const FoodTruck = () => {
 		navigate('/foodtrucks');
     };
 
-    const handleSubmit = (event) => {
+    const handleEdit = (event) => {
 		event.preventDefault();
 		axios.put(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`, foodTruck)
-		.then((res) => navigate(`/`))
+		.then((res) => navigate(`/foodtrucks/`))
+    };
+    
+    const [edit, setEdit] = useState(false)
+
+    const editFoodTruck = (e) => {
+        e.preventDefault()
+        setEdit(true)
+    }
+
+    const handleChange = (event) => {
+		setFoodTruck({ ...foodTruck, [event.target.id]: event.target.value });
 	};
 
+    //create a form 
+    //conditionally render if edit = true
+    //change input value
+    //handleEdit
 
+    
     const [menu, setMenu] = useState(true)
     const [reviews, setReviews] = useState(false)
 
@@ -65,18 +81,40 @@ const FoodTruck = () => {
             <div>Food truck images carousel</div>
                 <div className='food-truck-container'>
                 
+                {!edit ? 
+                    <div>
+                        <h1>{foodTruck.name}</h1>
+                        <ul className='food-truck-info'>
+                            <li>{foodTruck.location}</li>
+                            <li>star rating:</li>
+                            <li>hours:</li> 
+                        </ul>
+                        <button onClick={editFoodTruck}>edit foodtruck</button>
+                    </div>
+                : 
 
-                    <h1>{foodTruck.name}</h1>
-                    <ul className='food-truck-info'>
-                        <li>{foodTruck.location}</li>
-                        <li>star rating:</li>
-                    <li>hours:</li>
+                    <form onSubmit={handleEdit}>
+                        <h1><input
+                            type='text'
+                            id='name'
+                            placeholder={foodTruck.name}
+                            onChange={handleChange} /></h1>
+                        <ul>
+                            <li><input
+                                type='text'
+                                id='location'
+                                placeholder={foodTruck.location}
+                                onChange={handleChange} /></li>
+                            <li>star rating:</li>
+                            <li>hours:</li>
+                        </ul>
+                        <button>Submit changes</button>
+                    </form>
+
+                    }
                     
-
-
-                </ul>
                 <div>
-                    <button>edit foodtruck</button>
+
                     <button onClick={checkForDelete}>delete foodtruck</button>
                     
                     {checkDelete ? <div>

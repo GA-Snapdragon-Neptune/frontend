@@ -1,14 +1,20 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './addfoodtruck.css'
 
 const AddFoodTruck = () => {
+    const { id } = useParams()
     const navigate = useNavigate();
     const [newFoodTruck, setNewFoodTruck] = useState({
         name: '',
         location: '',
-        menu: [{}]
+        menu: [{
+
+        }],
+        owner: {
+            _id: "62ed65349d3864f3942ad6c6"
+        }
     })
 
     //add functionality to add additional menu items
@@ -44,7 +50,6 @@ const AddFoodTruck = () => {
             menu.description = event.target.value
             return { ...current, menu}
         })
-        console.log(newFoodTruck)
     }
 
 	const handleSubmit = (event) => {
@@ -52,7 +57,7 @@ const AddFoodTruck = () => {
 		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks`, newFoodTruck)
             .then(() => {
                 console.log(newFoodTruck)
-				navigate('/foodtrucks')
+				navigate(`/foodtrucks/`)
 			
 		}
 		)
