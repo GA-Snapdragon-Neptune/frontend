@@ -3,6 +3,8 @@ import TruckList from './components/TruckList';
 import FoodTruck from './components/FoodTruck'
 import { Routes, Route } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
+import Register from './components/Register';
+import Login from './components/Login';
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
       nav bar
       <Routes>
 				<Route path='/' />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
 			</Routes>
