@@ -1,7 +1,8 @@
 import './App.css';
 import TruckList from './components/TruckList';
 import FoodTruck from './components/FoodTruck'
-import { Routes, Route } from 'react-router-dom';
+import Register from './components/Register';
+import { Routes, Route, Link } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
 
 function App() {
@@ -15,10 +16,9 @@ function App() {
 
 
   return (
-    <div className="App">
-      nav bar
+    <div>
       <Routes>
-				<Route path='/' />
+        <Route path='/' element={<Register />} />
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
 			</Routes>
