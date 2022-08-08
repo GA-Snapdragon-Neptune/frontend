@@ -62,7 +62,7 @@ const AddFoodTruck = () => {
                 <label>Menu Item</label>
                 <input
                     onChange={handleChange}
-                    id='????'
+                    id='menu'
                     placeholder='Name'
                     value={newFoodTruck.menu[0].name}
                     />
@@ -70,13 +70,13 @@ const AddFoodTruck = () => {
                     onChange={handleChange}
                     id='price'
                     placeholder='Price'
-                    value={newFoodTruck.menu.price}
+                    value={newFoodTruck.menu[0].price}
                     />
                 <input
                     onChange={handleChange}
                     id='description'
                     placeholder='Description'
-                    value={newFoodTruck.menu.description}
+                    value={newFoodTruck.menu[0].description}
                 />
                 <button type='submit'>Submit</button>
             </form>
