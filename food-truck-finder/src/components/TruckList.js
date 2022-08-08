@@ -2,15 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import AddFoodTruck from './AddFoodTruck';
-import FoodTruck from './FoodTruck';
+// import Map from './Map'
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
-
-//use this laterrrrr for map
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-  } from "use-places-autocomplete";
-
 
 const TruckList = () => {
     const [foodTruckList, setFoodTruckList] = useState([])
@@ -21,15 +14,6 @@ const TruckList = () => {
                 setFoodTruckList(res.data)
             })
     }, []);
-
-    //this is for the map later
-    const addresses = [{}]
-
-    foodTruckList.map((foodtruck) => {
-        addresses.push(foodtruck.location)
-        // console.log(addresses)
-    })
-
 
     return (
         <div className='bg-[]'>
@@ -45,6 +29,10 @@ const TruckList = () => {
                     <p className='text-sm'>{foodtruck.location}</p>
                 </div>
             ))}
+            <div>
+                Map
+                {/* <Map /> */}
+            </div>
         </div>
     );
 };

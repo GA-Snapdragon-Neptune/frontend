@@ -2,6 +2,7 @@ import './App.css';
 import TruckList from './components/TruckList';
 import FoodTruck from './components/FoodTruck'
 import Register from './components/Register';
+import Login from './components/Login';
 import { Routes, Route, Link } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
 
@@ -18,7 +19,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Register />} />
+      <Route path='/' />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
 			</Routes>
