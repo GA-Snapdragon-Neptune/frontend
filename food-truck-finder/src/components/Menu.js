@@ -25,7 +25,7 @@ return (
                     className='rounded-lg w-26 md:w-30 box row-start-1 row-end-4 col-start-1 my-1'
                     />
                     <h3 className='h-6 text-sm font-bold py-0 col-start-2'>{item.name}</h3>
-                    <p className='h-6 text-sm text-right py-0 box col-end-4 font-semibold'>{item.price}</p>
+                    <p className='h-6 text-sm text-right py-0 box col-end-4 font-semibold'>{`$${item.price}`}</p>
                     <p className='text-xs box row-start-2 row-end-4 col-start-2 col-end-4 '>{item.description}</p>
                   </div> 
                    ))}

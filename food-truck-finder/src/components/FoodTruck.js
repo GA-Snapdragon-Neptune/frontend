@@ -94,7 +94,7 @@ const FoodTruck = () => {
                 <p><BiUserCircle className='text-3xl'/></p>
             </nav>
 
-            <div className='max-w-[800px w-full h-60 mx-auto text-center flex flex-col justify-center text-black '>
+            <div className='max-w-[800px] w-full h-60 mx-auto text-center flex flex-col justify-center text-black '>
                 <img src={pinkfoodtruck} alt='pink food truck' className='w-full h-full md:w-80 mx-auto -z-10' />
             </div>
 

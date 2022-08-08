@@ -57,7 +57,7 @@ const AddFoodTruck = () => {
 		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks`, newFoodTruck)
             .then(() => {
                 console.log(newFoodTruck)
-				navigate(`/foodtrucks/`)
+				navigate(`/foodtrucks/${id}`)
 			
 		}
 		)
@@ -66,8 +66,8 @@ const AddFoodTruck = () => {
 
 
     return (
-        <div>
-            <h1>add a food truck</h1>
+        <div className='border'>
+            <h1 className='text-center mb-10'>add a food truck</h1>
             <form className='add-truck-form' onSubmit={handleSubmit}>
                 <label htmlFor='foodtruck-name'>Food Truck Name</label>
                 <input
@@ -75,6 +75,7 @@ const AddFoodTruck = () => {
                     id='name'
                     placeholder='Food Truck Name'
                     value={newFoodTruck.name}
+                    className='border'
                 />
                 <label htmlFor='address'>Location</label>
                 <input
@@ -82,6 +83,7 @@ const AddFoodTruck = () => {
                     id='location'
                     placeholder='Enter address'
                     value={newFoodTruck.location}
+                    className='border'
                 />
                 <label>Menu Item</label>
                 <input
@@ -89,20 +91,23 @@ const AddFoodTruck = () => {
                     // id='menu.name'
                     placeholder='Name'
                     value={newFoodTruck.menu.name}
+                    className='border'
                     />
                 <input
                     onChange={handlePrice}
                     id='price'
                     placeholder='Price'
                     defaultValue={newFoodTruck.menu.price}
+                    className='border'
                     />
                 <input
                     onChange={handleDescription}
                     id='description'
                     placeholder='Description'
                     defaultValue={newFoodTruck.menu.description}
+                    className='border'
                 />
-                <button type='submit'>Submit</button>
+                <button type='submit' className='border bg-black text-white px-2'>Submit</button>
             </form>
         </div>
     );
