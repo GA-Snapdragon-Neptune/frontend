@@ -4,6 +4,7 @@ import FoodTruck from './components/FoodTruck'
 import { Routes, Route } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
 import ReviewFood from './components/reviewFood';
+import AddReview from './components/addReview'
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
 				<Route path='/' element={<AddFoodTruck />}/>
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
-        <Route path='/foodtrucks/:id/reviews' element={<ReviewFood />} />
+        <Route path='/reviews' element={<addReview />} />
 			</Routes>
     </div>
   );
