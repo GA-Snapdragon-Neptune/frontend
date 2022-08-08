@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import AddFoodTruck from './AddFoodTruck';
-// import Map from './Map'
+import Map from './Map'
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
 
 const TruckList = () => {
@@ -31,7 +31,7 @@ const TruckList = () => {
             ))}
             <div>
                 Map
-                {/* <Map /> */}
+                <Map foodTruckList={foodTruckList} />
             </div>
         </div>
     );
