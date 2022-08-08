@@ -15,6 +15,10 @@ const TruckList = () => {
             })
     }, []);
 
+    const addressesArr = foodTruckList.map((foodtruck) => {
+        return foodtruck.location
+    })
+
     return (
         <div className='bg-[]'>
             <nav className='flex justify-between items-center h-16 max-w-[1240px] mx-auto px-2 text-black bg-white'>
@@ -30,8 +34,7 @@ const TruckList = () => {
                 </div>
             ))}
             <div>
-                Map
-                <Map foodTruckList={foodTruckList} />
+                <Map addressesArr={addressesArr} />
             </div>
         </div>
     );
