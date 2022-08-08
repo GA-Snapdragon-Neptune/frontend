@@ -8,7 +8,8 @@ const AddFoodTruck = () => {
     const [newFoodTruck, setNewFoodTruck] = useState({
         name: '',
         location: '',
-        menu: [{}]
+        menu: [{}],
+        owner: { _id: localStorage.getItem('id') || '' }
     })
 
     //add functionality to add additional menu items
@@ -49,10 +50,19 @@ const AddFoodTruck = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks`, newFoodTruck)
-            .then(() => {
+		axios({
+            method: 'post',
+            url:`http://localhost:8000/foodtrucks`,
+            data: newFoodTruck,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+            .then((res) => {
+                console.log(res)
                 console.log(newFoodTruck)
-				navigate('/foodtrucks')
+				// navigate('/foodtrucks')
+                console.log('success')
 			
 		}
 		)

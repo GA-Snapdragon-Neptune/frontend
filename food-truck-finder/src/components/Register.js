@@ -28,13 +28,14 @@ const Register = () => {
     //     userRef.current.focus()
     // }, [])
 
-    const [newUser, setNewUser] = useState({
+    const initialNewUser = {
         username: '',
         email: '',
         password: '',
         consumer: true,
         business: false,
-    })
+    }
+    const [newUser, setNewUser] = useState(initialNewUser)
 
     const [success, setSuccess] = useState(false)
 
@@ -55,41 +56,47 @@ const Register = () => {
         if (newUser.username !== '' && newUser.email !== '' && newUser.password !== ''){
             axios({
                 method: 'post',
-                url: 'https://young-anchorage-22001.herokuapp.com/users/signup',
+                url: 'http://localhost:8000/users/signup',
                 data: newUser
             })
             .then((res) => {
                 if (res.status === 201) setSuccess(true)
             })
         }
+        setNewUser(initialNewUser)
     };
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <h1>New User</h1>
-                <label>username</label>
+                <h1>Sign Up</h1>
+                <label htmlFor='username'>Username: </label>
                 <input
                     type='text'
-                    onChange={handleChange}
                     id='username'
+                    autoComplete='off'
+                    onChange={handleChange}
                     value={newUser.username}
+                    required
                  />
                 <br></br>
-                <label>email</label>
+                <label htmlFor='email'>Email: </label>
                 <input
                     type='text'
-                    onChange={handleChange}
                     id='email'
+                    autoComplete='off'
+                    onChange={handleChange}
                     value={newUser.email}
+                    required
                 />
                 <br></br>
-                <label>password</label>
+                <label htmlFor='password'>Password: </label>
                 <input
                     type='password'
-                    onChange={handleChange}
                     id='password'
+                    onChange={handleChange}
                     value={newUser.password}
+                    required
                 />
                 <br></br>
                 <select onChange={handleRole}>
@@ -100,7 +107,7 @@ const Register = () => {
                 <button>Sign Up</button>
            </form>
            {success &&
-                <p>Successfully Registered! username: {newUser.username}</p>
+                <p>Successfully Registered!</p>
            }
            <h1>Returning User?</h1>
            <Link to="/login">Log In</Link>

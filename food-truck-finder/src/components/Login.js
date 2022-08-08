@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-
-//username/password regex?
 const Login = () => {
     const [user, setUser] = useState({
         username: '',
@@ -12,7 +10,7 @@ const Login = () => {
     })
 
     const [success, setSuccess] = useState(false)
-
+    const [errMsg, setErrMsg] = useState(null)
     const handleChange = (event) => {
         setUser({...user, [event.target.id]: event.target.value})
     }
@@ -20,51 +18,72 @@ const Login = () => {
     const handleSubmit = async (event) => {
 		event.preventDefault();
         if (user.username !== '' && user.email !== '' && user.password !== ''){
-                const {data, status} = await axios({
-                    method: 'post',
-                    url: 'https://young-anchorage-22001.herokuapp.com/users/signin',
-                    data: user,
-                    config: {withCredentials: true}
+                axios.post("http://localhost:8000/users/signin", user)
+                .then(res => {
+                    console.log(res)
+                    localStorage.setItem('token', res.data.token)
+                    localStorage.setItem('id', res.data.id)
+                    console.log(res.data.token)
+                    if (res.data?.token) {
+                        setSuccess(true)
+                    } else {
+                        setErrMsg(res.data)
+                    }
                 })
-                axios.defaults.headers.common['Authorization'] = `Bearer ${data['token']}`
-                console.log(data['token'])
-                if (status === 200) setSuccess(true)
             }
 
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h1>Log In</h1>
-                <label>username</label>
-                <input
-                    type='text'
-                    onChange={handleChange}
-                    id='username'
-                    value={user.username}
-                 />
-                <br></br>
-                <label>email</label>
-                <input
-                    type='text'
-                    onChange={handleChange}
-                    id='email'
-                    value={user.email}
-                />
-                <br></br>
-                <label>password</label>
-                <input
-                    type='password'
-                    onChange={handleChange}
-                    id='password'
-                    value={user.password}
-                />
-                <br></br>
-                <button>Sign In</button>
-           </form>
-           {success &&
-                <Navigate to="/" replace={true} />
+        <div className="login-form">
+            {success ?
+                    <>
+                        <p>Log In Successfully</p>
+                        <p>Welcome {user.username}!</p>
+                        <Link to="/">Click to return to Home</Link>
+                    </>
+                :
+                    <>
+                        {errMsg && <p>{errMsg}</p>}
+                        <form onSubmit={handleSubmit}>
+                            <h1>Log In</h1>
+                            <label htmlFor='username'>Username: </label>
+                            <input
+                                type='text'
+                                id='username'
+                                autoComplete='off'
+                                onChange={handleChange}
+                                value={user.username}
+                                required
+                            />
+                            <br></br>
+                            <label htmlFor='email'>Email: </label>
+                            <input
+                                type='text'
+                                id='email'
+                                onChange={handleChange}
+                                value={user.email}
+                                required
+                            />
+                            <br></br>
+                            <label htmlFor='password'>Password: </label>
+                            <input
+                                type='password'
+                                id='password'
+                                onChange={handleChange}
+                                value={user.password}
+                                required
+                            />
+                            <br></br>
+                            <button>Sign In</button>
+                        </form>
+                        <p>
+                                Need an Account? <br></br>
+                            <span>
+                                <Link to="/register">Sign Up</Link>
+                            </span>
+                        </p>
+                    </>
             }
         </div>
     );

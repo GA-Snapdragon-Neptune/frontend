@@ -25,6 +25,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
+        <Route path='/add' element={<AddFoodTruck />} />
 			</Routes>
     </div>
   );
