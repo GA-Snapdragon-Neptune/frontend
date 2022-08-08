@@ -89,6 +89,7 @@ const FoodTruck = () => {
     
     return (
         <div className='h-full w-full'>
+            
             <nav className='flex justify-between items-center h-16 max-w-[1240px] mx-auto px-2 text-black bg-white'>
                 <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
                 <p><BiUserCircle className='text-3xl'/></p>

@@ -5,22 +5,24 @@ import AddFoodTruck from './AddFoodTruck';
 import FoodTruck from './FoodTruck';
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
 
+//use this laterrrrr for map
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
   } from "use-places-autocomplete";
 
+
 const TruckList = () => {
     const [foodTruckList, setFoodTruckList] = useState([])
 
     useEffect(() => {
-		//Write your get/fetch here
 		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/`)
             .then((res) => {
                 setFoodTruckList(res.data)
             })
     }, []);
 
+    //this is for the map later
     const addresses = [{}]
 
     foodTruckList.map((foodtruck) => {

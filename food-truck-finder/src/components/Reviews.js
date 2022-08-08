@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './reviews.css'
+import ReviewForm from './ReviewForm';
 
 const Reviews = () => {
 
@@ -20,6 +20,7 @@ const Reviews = () => {
     return (
         <div>
             <button>leave a review (kenan)</button>
+            <ReviewForm />
             {reviewList.map((review) => (
                 <div key={review._id}>
                     <h3>{review.title}</h3>

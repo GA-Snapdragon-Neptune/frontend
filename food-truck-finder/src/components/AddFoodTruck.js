@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import './addfoodtruck.css'
 
 const AddFoodTruck = () => {
     const { id } = useParams()
@@ -68,7 +67,7 @@ const AddFoodTruck = () => {
     return (
         <div className='border'>
             <h1 className='text-center mb-10'>add a food truck</h1>
-            <form className='add-truck-form' onSubmit={handleSubmit}>
+            <form className='flex flex-col justify-center items-center' onSubmit={handleSubmit}>
                 <label htmlFor='foodtruck-name'>Food Truck Name</label>
                 <input
                     onChange={handleChange}
@@ -88,7 +87,6 @@ const AddFoodTruck = () => {
                 <label>Menu Item</label>
                 <input
                     onChange={handleMenuChange}
-                    // id='menu.name'
                     placeholder='Name'
                     value={newFoodTruck.menu.name}
                     className='border'
