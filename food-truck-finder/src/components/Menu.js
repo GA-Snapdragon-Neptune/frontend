@@ -17,10 +17,10 @@ const Menu = () => {
 	}, [id]);
 //row-start-1 col-start-2  name
 
-return (
-        <div>
+    return (
+        <div className='w-100 h-100'>
             {menuItems.map((item) => (
-                <div key={item._id} className='h-50 border-b border-dotted p-4 grid overflow-hidden grid-cols-3 gap-x-2'>
+                <div key={item._id} className='h-50 p-4 grid overflow-hidden grid-cols-3 gap-x-2'>
                     <img src={food} alt='food'
                     className='rounded-lg w-26 md:w-30 box row-start-1 row-end-4 col-start-1 my-1'
                     />
