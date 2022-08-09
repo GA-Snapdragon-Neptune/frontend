@@ -7,6 +7,7 @@ import Login from './components/Login';
 import User from './components/User';
 import { Routes, Route } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
+import Welcome from './components/Welcome';
 
 function App() {
 
@@ -14,7 +15,9 @@ function App() {
     <div>
       
       <Routes>
-        <Route path='/' element={<Register />} />
+        
+        <Route path='/' element={<Welcome />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/user' element={<User />} />
         <Route path='/foodtrucks' element={<TruckList />} />
