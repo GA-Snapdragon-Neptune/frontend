@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
-import AddFoodTruck from './AddFoodTruck';
-// import Map from './Map'
+import Map from './Map'
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
+import { LoadScript } from '@react-google-maps/api';
+import AddFoodTruck from './AddFoodTruck';
 
 const TruckList = () => {
     const [foodTruckList, setFoodTruckList] = useState([])
+ 
 
     useEffect(() => {
 		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/`)
@@ -15,23 +17,37 @@ const TruckList = () => {
             })
     }, []);
 
+    const addressesArr = foodTruckList.map((foodtruck) => {
+        return foodtruck.location
+    })
+
     return (
-        <div className='bg-[]'>
-            <nav className='flex justify-between items-center h-16 max-w-[1240px] mx-auto px-2 text-black bg-white'>
+        <div>
+            <nav className='flex justify-between items-center h-14 max-w-[1240px] mx-auto px-2 text-black shadow-md z-50'>
                 <Link to='/'><BiArrowBack className='text-3xl' /></Link>
-                <p><BiUserCircle className='text-3xl'/></p>
+
+                <p>app name</p>
+
+                <Link to='/user'><BiUserCircle className='text-3xl' /></Link>
             </nav>
-            this page will display the map with food truck locations with card components for each food truck
-            <AddFoodTruck />
+
+            {/* <AddFoodTruck /> */}
+
+            <div className='flex justify-between overflow-auto'>
             {foodTruckList.map((foodtruck) => (
-                <div key={foodtruck._id} className='my-5 mx-10'>
-                    <Link to={foodtruck._id} className='underline'>{foodtruck.name}</Link>
-                    <p className='text-sm'>{foodtruck.location}</p>
-                </div>
+                    <Link to={foodtruck._id} key={foodtruck._id} >
+                        <div className='bg-white my-5 mx-5 border rounded-lg shadow-md hover:scale-105 w-44 p-5'>
+                        <h1 className='font-semibold'>{foodtruck.name}</h1>
+                        <p className='text-xs'>{foodtruck.location}</p>
+                        <p className='text-xs'>⭐⭐⭐⭐</p>
+                    </div>
+                    </Link>
+                
             ))}
+        </div>
+            
             <div>
-                Map
-                {/* <Map /> */}
+                <Map addressesArr={addressesArr} className='z-0' />
             </div>
         </div>
     );
