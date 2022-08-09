@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import AddFoodTruck from "./AddFoodTruck";
 
 const User = () => {
     useEffect(() => {
@@ -79,21 +80,23 @@ const User = () => {
         })
     }
     return (
+        <div className='flex flex-col justify-center items-center border'>
         <div>
             {deleted ? 
                 <p>Account Deleted</p>
                 :
                 <>
-                <h1>Welcome!</h1>
-                <button onClick={checkForUpdate}>Edit User Info</button>
+                <h1 className='font-bold text-3xl mb-10 border-b text-[#7ed957]'>Welcome!</h1>
+                <button onClick={checkForUpdate} className='hover:bg-[#7ed957] rounded-lg px-5 mb-5'>Edit User Info</button>
                 {checkUpdate ? 
                     <div>
                         {!updated ?
                             <>
-                                <p>populate fields you would like to update</p>
-                                <form>
+                                <form className='px-5'>
+                                    <p className='text-sm'>populate fields you would like to update</p>
                                     <label htmlFor='username'>Username: </label>
-                                        <input
+                                            <input
+                                                className='border'
                                             type='text'
                                             id='username'
                                             autoComplete='off'
@@ -103,7 +106,8 @@ const User = () => {
                                         />
                                         <br></br>
                                         <label htmlFor='email'>Email: </label>
-                                        <input
+                                            <input
+                                                className='border'
                                             type='text'
                                             id='email'
                                             autoComplete='off'
@@ -113,7 +117,8 @@ const User = () => {
                                         />
                                         <br></br>
                                         <label htmlFor='password'>Password: </label>
-                                        <input
+                                            <input
+                                                className='border'
                                             type='password'
                                             id='password'
                                             onChange={(e) => setPwd(e.target.value)}
@@ -121,9 +126,11 @@ const User = () => {
                                             required
                                         />
                                         <br></br>
-                                </form>
-                                <button onClick={handleSubmit}>Submit</button>
-                                <button onClick={exitUpdate}>Cancel</button>
+                                        </form>
+                                    <div className='mt-5'>
+                                    <button onClick={handleSubmit} className='hover:bg-[#7ed957] border rounded-lg px-5'>Submit</button>
+                                    <button onClick={exitUpdate} className='hover:bg-[#7ed957] border rounded-lg px-5'>Cancel</button>
+                                    </div>
                             </>
                         :
                             <p>user updated</p>
@@ -134,18 +141,20 @@ const User = () => {
                     null
                 }
                 <br></br>
-                <button onClick={checkForDelete}>Delete User</button>
+                <button onClick={checkForDelete} className='hover:bg-[#7ed957] rounded-lg px-5 mb-5'>Delete User</button>
                 {checkDelete ? 
                     <div>
                         <p>Are you sure you want to delete ?</p>
-                        <button onClick={handleDelete}>Confirm</button>
-                        <button onClick={exitDelete}>Cancel</button>
+                        <button onClick={handleDelete} className='hover:bg-[#7ed957] border rounded-lg px-5'>Confirm</button>
+                        <button onClick={exitDelete} className='hover:bg-[#7ed957] border rounded-lg px-5'>Cancel</button>
                     </div> 
                     : 
                     null
                 }
                 </>
             }
+            </div>
+            <AddFoodTruck/>
         </div>
     );
 };

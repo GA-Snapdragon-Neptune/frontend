@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './addfoodtruck.css'
+// import './addfoodtruck.css'
 
 const AddFoodTruck = () => {
     const navigate = useNavigate();
@@ -64,7 +64,7 @@ const AddFoodTruck = () => {
 
 
     return (
-        <div>
+        <div className='flex flex-col justify-center items-center'>
             <h1>add a food truck</h1>
             <form className='add-truck-form'>
                 <label htmlFor='name'>Food Truck Name</label>
