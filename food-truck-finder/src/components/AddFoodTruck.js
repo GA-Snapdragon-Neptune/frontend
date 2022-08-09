@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
 import axios from 'axios';
 
 const AddFoodTruck = () => {
@@ -15,13 +16,6 @@ const AddFoodTruck = () => {
             _id: "62ed65349d3864f3942ad6c6"
         }
     })
-
-    //add functionality to add additional menu items
-    // const [menuItem, setMenuItem] = useState(0)
-
-    // const addMenuItem = () => {
-    //     setMenuItem(menuItem + 1);
-    // }
 
 
     const handleChange = (event) => {
@@ -56,13 +50,12 @@ const AddFoodTruck = () => {
 		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks`, newFoodTruck)
             .then(() => {
                 console.log(newFoodTruck)
-				navigate(`/foodtrucks/${id}`)
+				// navigate(`/foodtrucks/${id}`)
 			
 		}
 		)
     };
     
-
 
     return (
         <div className='border'>
