@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 
 const UpdateReview = () => {
-
-    const [updateReview, setUpReview] = useState(0)
-
-    const UpdatedReview = (id) => {
-        axios.put(`https://young-anchorage-22001.herokuapp.com/reviews/:reviewsId, {id, updateReview}`)
-        .then((res) => {
-            setUpReview(res.data.reviews)
-        })
-    }
-
+    const navigate = useNavigate()
+    const handleEdit = (e) => {
+        navigate(`https://young-anchorage-22001.herokuapp.com/reviews/reviewsEdit`)} 
     return( 
-        <div>
-            <button onClick={(e) => {UpdatedReview(e.target.value_id)}}>Edit</button>
+        <div className="edit-button">
+            <button type="button" onClick={handleEdit}>Edit Review</button>
         </div>
     )
 }

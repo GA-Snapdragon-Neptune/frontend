@@ -7,7 +7,7 @@ import AddFoodTruck from './components/AddFoodTruck';
 import AddReview from './components/addReview';
 import DeleteReview from './components/deleteReview';
 import UpdateReview from './components/updateReview';
-
+import EditForm from './components/EditForm';
 
 function App() {
 
@@ -27,6 +27,7 @@ function App() {
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
         <Route path='/reviews' element={<AddReview />} />
+        <Route path='/reviews/editReviews' element={<EditForm />} />
         {/* <Route path='/reviews/:id/deleteReview' element={<DeleteReview />} /> */}
         {/* <Route path='/reviews/:id/updateReview' element={<UpdateReview />} /> */}
 			</Routes>

@@ -1,52 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './form.css'
 
 
-const ReviewForm = () => {
+const ReviewForm = ({id}) => {
     const navigate = useNavigate()
-    // const [myReview, setMyReview] = useState('')
-    const [myReview, setMyReview] = useState({
+    const initialReviewState = {
         title: '',
         body: '',
-        author: '',
-        })
-
-        const { foodTruckId } = useParams() 
-
+        author: '62ed652c9d3864f3942ad6c4',
+        foodTruckId: id
+    }
+    const [myReview, setMyReview] = useState(initialReviewState)
         const handleChange = (e) => {
             setMyReview({...myReview, [e.target.id]: e.target.value})
         }
-
-    const AddReview = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-		//Write your get/fetch here
-		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${foodTruckId}`, myReview)
+		axios.post(`https://young-anchorage-22001.herokuapp.com/reviews`, myReview)
             .then(() => {
-                console.log(myReview)
-                navigate('/foodtrucks')
+                navigate(`/foodtrucks/${id}`)
             })
+        setMyReview(initialReviewState)
+        
 	};
 
     return (
             <form className="sign-up">
             <div>
-                <label 
-                className="form"
-                onChange={handleChange}>Leave a Review</label>
-            </div>
+                <label htmlFor="title">title</label>
                 <input 
-                className="form-box" 
-                type="text"
-                placeholder="Write your review"
-                onChange={(e) => setMyReview(e.target.value)}>
+                    className="title-box" 
+                    placeholder="Review Title"
+                    id="title"
+                    value={myReview.title}
+                    onChange={handleChange}>
                 </input>
+                <label htmlFor="body">body</label>
+                <input 
+                    className="body-box"
+                    placeholder="Review Content"
+                    id="body"
+                    value={myReview.body}
+                    onChange={handleChange}>
+                </input>
+            </div>
             <div>
                 <button 
-                className="submit-button" 
-                onClick={AddReview}
-                onChange={(e) => setMyReview(e.target.value)}
+                    className="submit-button" 
+                    onClick={handleSubmit}
+                    onChange={(e) => setMyReview(e.target.value)}
                 >Submit Review</button>
             </div>
             </form>

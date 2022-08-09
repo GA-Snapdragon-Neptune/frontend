@@ -1,24 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import FoodTruck from "./FoodTruck";
 
-const DeleteReview = () => {
-    
-    const {foodTruckId, reviewId} = useParams()
+const DeleteReview = ({foodTruckId, reviewId}) => {
     const navigate = useNavigate()
-    const [deleteReview, setOldReview] = useState(0)
-
-    const DeleteMyReview = (id) => {
-        axios.delete(`https://young-anchorage-22001.herokuapp.com/reviews/${foodTruckId}/${reviewId}`)
-        .then((res) => {
-            setOldReview(res.data.review)
+    const handleDelete = async (e) => {
+        await axios.delete(`https://young-anchorage-22001.herokuapp.com/reviews/${foodTruckId}/${reviewId}`)
+        .then (() => {
+            navigate(`/foodtrucks/${foodTruckId}`)
         })
-    }
+        } 
 
     return(
         <div className="del-review">
-            <button onClick={(e) => {DeleteMyReview(e.target.value_id)}}>Delete</button>
+        <button type="button" onClick={handleDelete}>Delete Review</button>
         </div>
     )
 }

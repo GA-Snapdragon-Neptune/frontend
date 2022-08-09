@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './reviews.css'
 import AddReview from './addReview';
-import DeleteReview from './deleteReview';
+// import DeleteReview from './deleteReview';
 import UpdateReview from './updateReview';
 
 const Reviews = () => {
@@ -17,20 +17,30 @@ const Reviews = () => {
             .then((res) => {
                 setReviewList(res.data.reviews)
             })
-	}, [id]);
+	}, [id, reviewList]);
 
+
+    const handleDelete = (reviewId) => {
+        axios.delete(`https://young-anchorage-22001.herokuapp.com/reviews/${id}/${reviewId}`)
+        .then ((res) => {
+            console.log(res)
+        })
+    }
 
     return (
         <div>
-            {/* <button>leave a review (kenan)</button> */}
-            <AddReview />
+            <AddReview 
+            id={id}
+            />
             {reviewList.map((review) => (
                 <div key={review._id}>
                     <h3>{review.title}</h3>
                     <p>{review.body}</p>
                     <div className='edit-delete'>
-                    <DeleteReview />
-                    <UpdateReview />
+                        <div className="del-review">
+                            <button type="button" onClick={() => handleDelete(review._id)}>Delete</button>
+                        </div>
+                        <UpdateReview />
                     </div>
                 </div>
             ))}
