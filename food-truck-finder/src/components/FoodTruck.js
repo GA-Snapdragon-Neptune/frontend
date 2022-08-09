@@ -31,11 +31,8 @@ const FoodTruck = () => {
 		navigate('/foodtrucks');
     };
 
-
     //check if the user is food truck owner, then render food truck settings
     const [isOwner, setIsOwner] = useState(false)
-
-
     const [edit, setEdit] = useState(false)
     //edit a food truck, set Edit state to false
     const handleEdit = (event) => {
@@ -56,7 +53,6 @@ const FoodTruck = () => {
     const handleChange = (event) => {
 		setFoodTruck({ ...foodTruck, [event.target.id]: event.target.value });
 	};
-
 
     //toggle between showing menu and showing reviews
     const [menu, setMenu] = useState(true)
