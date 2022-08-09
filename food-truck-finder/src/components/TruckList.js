@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import Map from './Map'
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
-import { LoadScript } from '@react-google-maps/api';
-import AddFoodTruck from './AddFoodTruck';
+
 
 const TruckList = () => {
     const [foodTruckList, setFoodTruckList] = useState([])
@@ -23,11 +22,10 @@ const TruckList = () => {
 
     return (
         <div>
-            <nav className='flex justify-between items-center h-14 max-w-[1240px] mx-auto px-2 text-black shadow-md z-50'>
+            <nav className='flex justify-between items-center h-14 w-screen mx-auto px-2 text-black shadow-md z-50'>
                 <Link to='/'><BiArrowBack className='text-3xl' /></Link>
 
-                <p>app name</p>
-
+                <p className='font-extrabold text-xl'>GRUBTRUCK</p>
                 <Link to='/user'><BiUserCircle className='text-3xl' /></Link>
             </nav>
 
