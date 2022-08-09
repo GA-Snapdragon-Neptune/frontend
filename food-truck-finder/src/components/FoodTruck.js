@@ -33,7 +33,7 @@ const FoodTruck = () => {
 
 
     //check if the user is food truck owner, then render food truck settings
-    const [isOwner, setIsOwner] = useState(true)
+    const [isOwner, setIsOwner] = useState(false)
 
 
     const [edit, setEdit] = useState(false)

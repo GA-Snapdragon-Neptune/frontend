@@ -18,68 +18,66 @@ import Locate from './Locate';
     lat: 30.266666,
     lng: -97.733330
   }
+
   const options = {
     disableDefaultUI: true,
     zoomControl: true,
   }
 
-
 const Map = ({ addressesArr }) => {
 
     const [libraries] = useState(['places']);
-    const [markers, setMarkers] = useState([])
-
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries
     })
+    
+    const [markers, setMarkers] = useState([])
 
-
+    const getCoordinates = useCallback(() => {
+        addressesArr.map((address) => {
+          return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
+            .then((res) => {
+              const { lat, lng } = res.data.results[0].geometry.location
+                setMarkers(current => [...current, { lat, lng }])
+            })
+          })
+    }, [addressesArr]);
+    
     useEffect(() => {
-        addressesArr.map((address) => (
-            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
-              .then((res) => {
-                  const { lat, lng } = res.data.results[0].geometry.location
-                  setMarkers(current => [...current, { lat, lng }])
-                  console.log(markers)
-              })
-          ))
-    }, []);
+        getCoordinates()
+    }, [getCoordinates])
 
+   
 
-
-    
-    if (loadError) return "Error loading maps";
-    if (!isLoaded) return "Loading Maps!"
-
-    
+      if (loadError) return "Error loading maps";
+      if (!isLoaded) return "Loading Maps!"
+      
     return (
         <div>
 
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
-                zoom={12}
+                zoom={11}
                 center={center}
                 options={options}
-
             >
 
                 
                 {markers.map((marker, index) => (
-                <MarkerF
-                    key={index}
-                    position={{ lat: marker.lat, lng: marker.lng }}
-                    icon={{
-                    url: '/food-truck.svg',
-                    origin: new window.google.maps.Point(0, 0),
-                    anchor: new window.google.maps.Point(15, 15),
-                    scaledSize: new window.google.maps.Size(30, 30),
-                    }}
-                />
-            ))}
+                    <MarkerF
+                        key={index}
+                        position={{ lat: marker.lat, lng: marker.lng }}
+                        icon={{
+                            url: '/food-truck.svg',
+                            origin: new window.google.maps.Point(0, 0),
+                            anchor: new window.google.maps.Point(15, 15),
+                            scaledSize: new window.google.maps.Size(30, 30),
+                        }}
+                    />
+                ))}
 
-            </GoogleMap>
-
+            </GoogleMap> 
 
         </div>
     );

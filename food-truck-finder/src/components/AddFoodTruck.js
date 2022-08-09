@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
 import axios from 'axios';
 
 const AddFoodTruck = () => {
@@ -56,7 +57,7 @@ const AddFoodTruck = () => {
 		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks`, newFoodTruck)
             .then(() => {
                 console.log(newFoodTruck)
-				navigate(`/foodtrucks/${id}`)
+				// navigate(`/foodtrucks/${id}`)
 			
 		}
 		)
