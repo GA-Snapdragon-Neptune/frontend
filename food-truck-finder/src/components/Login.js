@@ -35,18 +35,18 @@ const Login = () => {
     };
 
     return (
-        <div className='flex flex-col justify-center items-center text-center mt-20'>
+        <div className='bg-gray-100 h-screen flex flex-col items-center'>
             {success ?
                     <>
-                        <p>Log In Successfully</p>
+                        <p>Log In Successfully!</p>
                         <p>Welcome {user.username}!</p>
                         <Link to="/">Click to return to Home</Link>
                     </>
                 :
                     <>
                         {errMsg && <p>{errMsg}</p>}
-                        <form onSubmit={handleSubmit}>
-                            <h1>Log In</h1>
+                        <h1>Log In</h1>
+                        <form onSubmit={handleSubmit} className='border w-2/4 p-5 bg-white flex flex-col'>
                             <label htmlFor='username'>Username: </label>
                             <input
                                 type='text'
@@ -57,7 +57,6 @@ const Login = () => {
                             required
                             className='border'
                             />
-                            <br></br>
                             <label htmlFor='email'>Email: </label>
                             <input
                                 type='text'
@@ -67,7 +66,6 @@ const Login = () => {
                             required
                             className='border'
                             />
-                            <br></br>
                             <label htmlFor='password'>Password: </label>
                             <input
                                 type='password'
@@ -80,7 +78,7 @@ const Login = () => {
                             <br></br>
                             <button className='bg-black text-white px-4'>Sign In</button>
                         </form>
-                    <div className='mt-20'>
+                    <div className='mt-10 text-center'>
                     <p>
                                 Need an Account? <br></br>
                             <span>
