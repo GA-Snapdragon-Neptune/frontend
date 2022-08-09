@@ -31,8 +31,6 @@ const TruckList = () => {
                 <Link to='/user'><BiUserCircle className='text-3xl' /></Link>
             </nav>
 
-            {/* <AddFoodTruck /> */}
-
             <div className='flex justify-between overflow-auto'>
             {foodTruckList.map((foodtruck) => (
                     <Link to={foodtruck._id} key={foodtruck._id} >
