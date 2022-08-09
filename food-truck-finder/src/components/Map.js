@@ -55,24 +55,22 @@ const Map = ({ addressesArr }) => {
       
     return (
         <div>
-
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={11}
                 center={center}
                 options={options}
             >
-
-                
+ 
                 {markers.map((marker, index) => (
                     <MarkerF
                         key={index}
                         position={{ lat: marker.lat, lng: marker.lng }}
                         icon={{
-                            url: '/food-truck.svg',
-                            origin: new window.google.maps.Point(0, 0),
-                            anchor: new window.google.maps.Point(15, 15),
-                            scaledSize: new window.google.maps.Size(30, 30),
+                            url: '/Grubtruck (1).svg',
+                            origin: new window.google.maps.Point(30, 30),
+                            anchor: new window.google.maps.Point(40, 20),
+                            scaledSize: new window.google.maps.Size(150, 150),
                         }}
                     />
                 ))}
