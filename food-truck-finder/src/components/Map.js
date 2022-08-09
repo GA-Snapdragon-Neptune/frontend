@@ -34,20 +34,19 @@ const Map = ({ addressesArr }) => {
         libraries
     })
 
-    const coordinates = []
 
     useEffect(() => {
-
         addressesArr.map((address) => (
-          axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
-            .then((res) => {
-                const { lat, lng } = res.data.results[0].geometry.location
-                coordinates.push({ lat, lng })
-                setMarkers(coordinates)
-            })
-        ))
-        console.log(markers)
+            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
+              .then((res) => {
+                  const { lat, lng } = res.data.results[0].geometry.location
+                  setMarkers(current => [...current, { lat, lng }])
+                  console.log(markers)
+              })
+          ))
     }, []);
+
+
 
     
     if (loadError) return "Error loading maps";
@@ -56,25 +55,28 @@ const Map = ({ addressesArr }) => {
     
     return (
         <div>
-            {/* <Locate panTo={panTo} /> */}
+
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={12}
                 center={center}
                 options={options}
-                // onLoad={onMapLoad}
+
             >
+
                 
-                           
+                {markers.map((marker, index) => (
                 <MarkerF
-                    position={center}
+                    key={index}
+                    position={{ lat: marker.lat, lng: marker.lng }}
                     icon={{
-                        url: '/food-truck.svg',
-                        origin: new window.google.maps.Point(0, 0),
-                        anchor: new window.google.maps.Point(15, 15),
-                        scaledSize: new window.google.maps.Size(30, 30),
-                      }}
+                    url: '/food-truck.svg',
+                    origin: new window.google.maps.Point(0, 0),
+                    anchor: new window.google.maps.Point(15, 15),
+                    scaledSize: new window.google.maps.Size(30, 30),
+                    }}
                 />
+            ))}
 
             </GoogleMap>
 
