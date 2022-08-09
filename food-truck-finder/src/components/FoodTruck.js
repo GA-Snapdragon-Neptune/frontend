@@ -90,19 +90,20 @@ const FoodTruck = () => {
     return (
         <div className='h-full w-full'>
             
-            <nav className='flex justify-between items-center h-14 w-screen mx-auto px-2 text-black shadow-md z-50'>
+            <nav className='bg-white flex justify-between items-center h-14 w-screen mx-auto px-2 text-black shadow-md z-50'>
                 <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
 
                 <p className='font-extrabold text-xl'>GRUBTRUCK</p>
 
                 <Link to='/user'><BiUserCircle className='text-3xl' /></Link>
             </nav>
-
+        
+        <div className='flex flex-col items-center md:flex-row'>
             <div className='max-w-[800px] w-full h-60 mx-auto text-center flex flex-col justify-center text-black '>
-                <img src={pinkfoodtruck} alt='pink food truck' className='w-full h-full md:w-80 mx-auto -z-10' />
+                <img src={pinkfoodtruck} alt='pink food truck' className='mx-auto -z-10' />
             </div>
 
-                <div className='bg-white mt-[-2rem] z-20 rounded-3xl h-full shadow-xl pb-20'>
+                <div className='bg-white md:mt-20 mt-[-2rem] max-w-xl h-auto z-20 rounded-3xl shadow-xl pb-20'>
                 
                 {!edit && !isOwner ? 
                     <div className='px-4 py-4'>
@@ -159,6 +160,7 @@ const FoodTruck = () => {
                     {menu ? <Menu /> : <Reviews /> } 
                 
                 </div>
+            </div>
         </div>
     );
 };

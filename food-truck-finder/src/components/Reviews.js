@@ -18,7 +18,7 @@ const Reviews = () => {
 
 
     return (
-        <div>
+        <div className='w-100 h-100'>
             <button>leave a review (kenan)</button>
             <ReviewForm />
             {reviewList.map((review) => (
