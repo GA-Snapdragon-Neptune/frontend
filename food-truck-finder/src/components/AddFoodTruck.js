@@ -17,13 +17,6 @@ const AddFoodTruck = () => {
         }
     })
 
-    //add functionality to add additional menu items
-    // const [menuItem, setMenuItem] = useState(0)
-
-    // const addMenuItem = () => {
-    //     setMenuItem(menuItem + 1);
-    // }
-
 
     const handleChange = (event) => {
 		setNewFoodTruck({ ...newFoodTruck, [event.target.id]: event.target.value });
@@ -63,7 +56,6 @@ const AddFoodTruck = () => {
 		)
     };
     
-
 
     return (
         <div className='border'>
