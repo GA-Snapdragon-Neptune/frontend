@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
 import Register from './components/Register';
 import Login from './components/Login';
+import User from './components/User';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
 				<Route path='/' />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/user' element={<User />} />
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
         <Route path='/add' element={<AddFoodTruck />} />
