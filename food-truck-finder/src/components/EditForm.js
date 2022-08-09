@@ -2,12 +2,12 @@ import axios from "axios"
 import React from "react"
 import { useNavigate } from "react-router-dom"
 
-const EditForm = ({foodTruckId}) => {
+const EditForm = () => {
     const navigate = useNavigate()
     const handleEdit = async (e) => {
-        await axios.put(`https://young-anchorage-22001.herokuapp.com/reviews/editReviews`)
+        await axios.put(`https://young-anchorage-22001.herokuapp.com/reviews/`)
         .then (() => {
-            navigate(`/foodtrucks/${foodTruckId}`)
+            navigate(`/foodtrucks`)
         })
         } 
     return( 
