@@ -1,105 +1,115 @@
 import { useState } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import './addfoodtruck.css'
 
 const AddFoodTruck = () => {
-    const { id } = useParams()
     const navigate = useNavigate();
+    const [menus, setMenus] = useState([
+        {
+            name: '',
+            price: 0,
+            description: ''
+        }
+    ])
+
     const [newFoodTruck, setNewFoodTruck] = useState({
         name: '',
         location: '',
-        menu: [{
-
-        }],
-        owner: {
-            _id: "62ed65349d3864f3942ad6c6"
-        }
+        menu: menus,
+        owner: { _id: localStorage.getItem('id') || '' }
     })
-
 
     const handleChange = (event) => {
 		setNewFoodTruck({ ...newFoodTruck, [event.target.id]: event.target.value });
     };
     
-    const handleMenuChange = (event) => {
-        setNewFoodTruck(current => {
-            const menu = { ...current.menu }
-            menu.name = event.target.value
-            return {...current, menu}
-        })
-    }
-
-    const handlePrice = (event) => {
-        setNewFoodTruck(current => {
-            const menu = { ...current.menu }
-            menu.price = event.target.value
-            return { ...current, menu}
-        })
-    }
-    const handleDescription = (event) => {
-        setNewFoodTruck(current => {
-            const menu = { ...current.menu }
-            menu.description = event.target.value
-            return { ...current, menu}
-        })
+    const handleMenuChange = (event, index) => {
+        let data = [...menus]
+        data[index][event.target.name] = event.target.value
+        setMenus(data)
+    };
+    const addFields = () => {
+        let object = {
+            name: '',
+            price: 0,
+            description: ''
+        }
+    
+        setMenus([...menus, object])
+      }
+    const removeFields = (index) => {
+        let data = [...menus];
+        data.splice(index, 1)
+        setMenus(data)
     }
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks`, newFoodTruck)
-            .then(() => {
-                console.log(newFoodTruck)
-				// navigate(`/foodtrucks/${id}`)
-			
+        setNewFoodTruck({ ...newFoodTruck, menu: menus });
+		axios({
+            method: 'post',
+            url:`http://localhost:8000/foodtrucks`,
+            data: newFoodTruck,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+            .then((res) => {
+                navigate(`/foodtrucks/${res.data._id}`)
 		}
 		)
     };
     
 
+
     return (
-        <div className='border'>
-            <h1 className='text-center mb-10'>add a food truck</h1>
-            <form className='flex flex-col justify-center items-center' onSubmit={handleSubmit}>
-                <label htmlFor='foodtruck-name'>Food Truck Name</label>
+        <div className='flex flex-col justify-center items-center'>
+            <h1>add a food truck</h1>
+            <form className='add-truck-form'>
+                <label htmlFor='name'>Food Truck Name</label>
                 <input
                     onChange={handleChange}
                     id='name'
                     placeholder='Food Truck Name'
                     value={newFoodTruck.name}
-                    className='border'
                 />
-                <label htmlFor='address'>Location</label>
+                <label htmlFor='location'>Location</label>
                 <input
                     onChange={handleChange}
                     id='location'
                     placeholder='Enter address'
                     value={newFoodTruck.location}
-                    className='border'
                 />
                 <label>Menu Item</label>
-                <input
-                    onChange={handleMenuChange}
-                    placeholder='Name'
-                    value={newFoodTruck.menu.name}
-                    className='border'
-                    />
-                <input
-                    onChange={handlePrice}
-                    id='price'
-                    placeholder='Price'
-                    defaultValue={newFoodTruck.menu.price}
-                    className='border'
-                    />
-                <input
-                    onChange={handleDescription}
-                    id='description'
-                    placeholder='Description'
-                    defaultValue={newFoodTruck.menu.description}
-                    className='border'
-                />
-                <button type='submit' className='border bg-black text-white px-2'>Submit</button>
+                {menus.map((menu, index) => {
+                    return (
+                        <div key={index}>
+                            <input
+                                name='name'
+                                placeholder='Name'
+                                value={menu.name}
+                                onChange={e => handleMenuChange(e, index)}
+                                />
+                            <input
+                                name='price'
+                                placeholder='Price'
+                                value={menu.price}
+                                onChange={e => handleMenuChange(e, index)}
+                                />
+                            <input
+                                name='description'
+                                placeholder='Description'
+                                value={menu.description}
+                                onChange={e => handleMenuChange(e, index)}
+                                />
+                            <button onClick={() => removeFields(index)}>Remove</button>
+                        </div>
+                    )
+                })}
             </form>
+            <button onClick={addFields}>Add Menu Item</button>
+            <button type='submit' onClick={handleSubmit}>Submit</button>
         </div>
     );
 };

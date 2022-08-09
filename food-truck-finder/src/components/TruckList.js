@@ -43,7 +43,10 @@ const TruckList = () => {
         </div>
             
             <div>
-                <Map addressesArr={addressesArr} className='z-0' />
+                <Map
+                    addressesArr={addressesArr}
+                    foodTruckList={foodTruckList}
+                    className='z-0' />
             </div>
         </div>
     );

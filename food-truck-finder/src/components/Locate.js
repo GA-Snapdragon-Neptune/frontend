@@ -1,10 +1,11 @@
 import React from 'react';
+import { IoNavigate } from 'react-icons/io5'
 
 const Locate = ({ panTo }) => {
     return (
-        <div className='locate'>
+        <div className='absolute z-10'>
             <button
-                className='bg-black text-white p-3'
+                className='bg-white text-black shadow-md p-2 mt-2 rounded-lg'
                 onClick={() => {
                 navigator.geolocation.getCurrentPosition((position) => {
                     panTo({
@@ -13,7 +14,7 @@ const Locate = ({ panTo }) => {
                    })
                }, () => null) 
             }}>
-                Search my location
+               show results for my location
             </button>
         </div>
     );

@@ -11,7 +11,7 @@ import Locate from './Locate';
 
   const mapContainerStyle = {
     width: '100vw',
-    height: '100vh'
+    height: '75vh'
   }
 
   const center = {
@@ -32,7 +32,8 @@ const Map = ({ addressesArr }) => {
         libraries
     })
     
-    const [markers, setMarkers] = useState([])
+  const [markers, setMarkers] = useState([])
+  const [selected, setSelected] = useState(null)
 
     const getCoordinates = useCallback(() => {
         addressesArr.map((address) => {
@@ -48,18 +49,36 @@ const Map = ({ addressesArr }) => {
         getCoordinates()
     }, [getCoordinates])
 
-   
+  
+  //a reference to the map instance
+  //accessible anywhere in code - state is to rerender, ref is to use state without re rendering
+  const mapRef = useRef()
+  //when map loads, assign map to useRef without re-renders
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, [])
+
+
+  //function to pan map to search input
+  //useCallback so react only creates one function
+  const panTo = useCallback(({ lat, lng }) => {
+    //access googlemap ref
+    mapRef.current.panTo({ lat, lng })
+    mapRef.current.setZoom(13)
+  }, [])
 
       if (loadError) return "Error loading maps";
       if (!isLoaded) return "Loading Maps!"
       
     return (
-        <div>
+      <div className='static flex flex-col items-center'>
+          <Locate panTo={panTo} />
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={11}
                 center={center}
                 options={options}
+                onLoad={onMapLoad}
             >
  
                 {markers.map((marker, index) => (
@@ -72,10 +91,26 @@ const Map = ({ addressesArr }) => {
                             anchor: new window.google.maps.Point(40, 20),
                             scaledSize: new window.google.maps.Size(150, 150),
                         }}
+                    onClick={() => {
+                      setSelected(marker)
+                      console.log(marker)
+                  }}
                     />
                 ))}
+          
+          {selected ? (
+          <InfoWindow
+          position={{ lat: selected.lat, lng: selected.lng }}
+          onCloseClick={() => {
+          setSelected(null)
+        }}>
+          <div>
+            <h2>Food Truck location</h2>
+          </div>
+        </InfoWindow>
+        ) : null}
 
-            </GoogleMap> 
+        </GoogleMap> 
 
         </div>
     );
