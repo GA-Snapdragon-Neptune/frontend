@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './reviews.css'
-import ReviewForm from './addReview';
+import AddReview from './addReview';
+import DeleteReview from './deleteReview';
+import UpdateReview from './updateReview';
 
 const Reviews = () => {
 
@@ -20,11 +22,16 @@ const Reviews = () => {
 
     return (
         <div>
-            <button>leave a review (kenan)</button>
+            {/* <button>leave a review (kenan)</button> */}
+            <AddReview />
             {reviewList.map((review) => (
                 <div key={review._id}>
                     <h3>{review.title}</h3>
                     <p>{review.body}</p>
+                    <div className='edit-delete'>
+                    <DeleteReview />
+                    <UpdateReview />
+                    </div>
                 </div>
             ))}
         </div>

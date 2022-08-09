@@ -2,3 +2,8 @@
     color: green;
     list-style-type: none;
 }
+
+.edit-delete {
+    display: flex;
+    align-items: center;
+}

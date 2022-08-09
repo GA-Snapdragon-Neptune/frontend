@@ -2,22 +2,30 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import './form.css'
-import ReviewFood from "./reviewFood";
-import Reviews from "./Reviews";
+
 
 const ReviewForm = () => {
     const navigate = useNavigate()
-    const [myReview, setMyReview] = useState('')
+    // const [myReview, setMyReview] = useState('')
+    const [myReview, setMyReview] = useState({
+        title: '',
+        body: '',
+        author: '',
+        })
 
-    // const handleChange = (event) => {
-    //     setMyForm(event.target.value)
-    // }
+        const { foodTruckId } = useParams() 
 
-    const addReview = () => {
+        const handleChange = (e) => {
+            setMyReview({...myReview, [e.target.id]: e.target.value})
+        }
+
+    const AddReview = (e) => {
+        e.preventDefault();
 		//Write your get/fetch here
-		axios.post(`https://young-anchorage-22001.herokuapp.com/reviews`, data)
+		axios.post(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${foodTruckId}`, myReview)
             .then(() => {
-                navigate('/reviews')
+                console.log(myReview)
+                navigate('/foodtrucks')
             })
 	};
 
@@ -25,7 +33,8 @@ const ReviewForm = () => {
             <form className="sign-up">
             <div>
                 <label 
-                className="form">Leave a Review</label>
+                className="form"
+                onChange={handleChange}>Leave a Review</label>
             </div>
                 <input 
                 className="form-box" 
@@ -36,7 +45,8 @@ const ReviewForm = () => {
             <div>
                 <button 
                 className="submit-button" 
-                onClick={addReview}
+                onClick={AddReview}
+                onChange={(e) => setMyReview(e.target.value)}
                 >Submit Review</button>
             </div>
             </form>

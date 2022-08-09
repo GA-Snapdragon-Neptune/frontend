@@ -3,8 +3,10 @@ import TruckList from './components/TruckList';
 import FoodTruck from './components/FoodTruck'
 import { Routes, Route } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
-import ReviewFood from './components/reviewFood';
-import AddReview from './components/addReview'
+// import ReviewFood from './components/reviewFood';
+import AddReview from './components/addReview';
+import DeleteReview from './components/deleteReview';
+import UpdateReview from './components/updateReview';
 
 
 function App() {
@@ -24,7 +26,9 @@ function App() {
 				<Route path='/' element={<AddFoodTruck />}/>
         <Route path='/foodtrucks' element={<TruckList />} />
 				<Route path='/foodtrucks/:id' element={<FoodTruck />} />
-        <Route path='/reviews' element={<addReview />} />
+        <Route path='/reviews' element={<AddReview />} />
+        {/* <Route path='/reviews/:id/deleteReview' element={<DeleteReview />} /> */}
+        {/* <Route path='/reviews/:id/updateReview' element={<UpdateReview />} /> */}
 			</Routes>
     </div>
   );
