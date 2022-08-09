@@ -1,16 +1,13 @@
 import './App.css';
 import TruckList from './components/TruckList';
 import FoodTruck from './components/FoodTruck'
-import Map from './components/Map'
 import Register from './components/Register';
 import Login from './components/Login';
 import User from './components/User';
 import { Routes, Route } from 'react-router-dom';
-import AddFoodTruck from './components/AddFoodTruck';
 import Welcome from './components/Welcome';
 
 function App() {
-
   return (
     <div>
       
