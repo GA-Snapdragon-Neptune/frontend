@@ -35,7 +35,9 @@ const Map = ({ addressesArr }) => {
   const [markers, setMarkers] = useState([])
   const [selected, setSelected] = useState(null)
 
-    const getCoordinates = useCallback(() => {
+
+  //parse the addresses into coordinates to display on the map
+  const getCoordinates = useCallback(() => {
         addressesArr.map((address) => {
           return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
             .then((res) => {
