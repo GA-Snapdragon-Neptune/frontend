@@ -18,7 +18,14 @@ const AddReview = ({id}) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-		axios.post(`http://localhost:8000/reviews`, myReview)
+		axios({
+            method: 'post',
+            url:`http://localhost:8000/reviews`, 
+            data: myReview,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
             .then(() => {
                 // navigate(`/foodtrucks/${id}`)
             })

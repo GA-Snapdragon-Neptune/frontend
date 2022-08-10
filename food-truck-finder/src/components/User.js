@@ -155,7 +155,11 @@ const User = () => {
                         }
                         </>
                     }
-                    <AddFoodTruck/>
+                    {localStorage.getItem('role') === 'business' ?
+                        <AddFoodTruck/>
+                        :
+                        null
+                    }
                 </>
             :
                 <Link to="/login" className='bg-black text-white px-3'>Please Sign In</Link>

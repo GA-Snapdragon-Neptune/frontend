@@ -16,11 +16,17 @@ const Reviews = () => {
             .then((res) => {
                 setReviewList(res.data.reviews)
             })
-	}, [id, reviewList.length]);
+	}, [id, reviewList]);
 
     // delete review
     const handleDelete = (reviewId) => {
-        axios.delete(`http://localhost:8000/reviews/${id}/${reviewId}`)
+        // axios.delete(`http://localhost:8000/reviews/${id}/${reviewId}`)
+        axios({method:'delete',
+            url:`http://localhost:8000/reviews/${id}/${reviewId}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
         .then ((res) => {
             console.log(res)
         })

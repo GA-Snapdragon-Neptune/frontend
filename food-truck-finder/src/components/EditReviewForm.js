@@ -2,7 +2,6 @@ import axios from "axios"
 import { useState } from "react"
 
 const EditReviewForm = ({review}) => {
-    console.log(review)
     const [edit, setEdit] = useState(false)
     const [editedReview, setEditedReview] = useState(review)
 
@@ -10,12 +9,21 @@ const EditReviewForm = ({review}) => {
         setEditedReview({...editedReview, [e.target.id]: e.target.value})
     }
     const editReview = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         setEdit(!edit)
     }
     const handleEdit = (id) => {
         setEditedReview({...editedReview, reviewId: id})
-        axios.put(`http://localhost:8000/reviews/${id}`, editedReview)
+        // axios.put(`http://localhost:8000/reviews/${id}`, editedReview)
+        axios({
+            method: 'put',
+            url:`http://localhost:8000/reviews/${id}`,
+            data:editedReview,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .catch(console.error)
     } 
     return( 
         <>

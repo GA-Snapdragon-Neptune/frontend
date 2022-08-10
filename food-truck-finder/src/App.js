@@ -13,11 +13,7 @@ function App() {
     <div>
       <Routes>
         {console.log(userId)}
-        {userId ?
-          <Route path='/' element={<TruckList />} />
-        :
-          <Route path='/' element={<Welcome />} />
-        }
+        <Route path='/' element={<Welcome />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/user' element={<User />} />
