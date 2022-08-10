@@ -3,7 +3,7 @@ import TruckList from './components/TruckList';
 import FoodTruck from './components/FoodTruck'
 import { Routes, Route } from 'react-router-dom';
 import AddFoodTruck from './components/AddFoodTruck';
-import AddReview from './components/addReview';
+import AddReview from './components/AddReview';
 import DeleteReview from './components/deleteReview';
 import UpdateReview from './components/updateReview';
 import EditForm from './components/EditForm';

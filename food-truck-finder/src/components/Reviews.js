@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './reviews.css'
-import AddReview from './addReview';
+import AddReview from './AddReview';
 // import DeleteReview from './deleteReview';
 import UpdateReview from './updateReview';
 
