@@ -32,8 +32,8 @@ const FoodTruck = () => {
     };
 
     //check if the user is food truck owner, then render food truck settings
-    const [isOwner, setIsOwner] = useState(false)
-    const [edit, setEdit] = useState(false)
+    const [isOwner, setIsOwner] = useState(true)
+    const [edit, setEdit] = useState(true)
     //edit a food truck, set Edit state to false
     const handleEdit = (event) => {
 		event.preventDefault();
@@ -99,7 +99,7 @@ const FoodTruck = () => {
                 <img src={pinkfoodtruck} alt='pink food truck' className='mx-auto -z-10' />
             </div>
 
-                <div className='bg-white md:mt-20 mt-[-2rem] max-w-xl h-auto z-20 rounded-3xl shadow-xl pb-20'>
+                <div className='bg-white md:mt-20 mt-[-2rem] max-w-xl md:w-full h-auto z-20 rounded-3xl shadow-xl pb-20'>
                 
                 {!edit && !isOwner ? 
                     <div className='px-4 py-4'>
