@@ -47,6 +47,7 @@ const Reviews = () => {
     const handleEdit = (id) => {
         console.log(id)
         setEditedReview({...editedReview, reviewId: id})
+        console.log(editedReview)
         axios.put(`https://young-anchorage-22001.herokuapp.com/reviews/${id}`, editedReview)
         .then(res => console.log(res))
         // navigate(`https://young-anchorage-22001.herokuapp.com/reviews/reviewsEdit`)
