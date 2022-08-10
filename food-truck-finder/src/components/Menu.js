@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './menu.css'
 import food from '../assets/food.jpg'
 
 const Menu = () => {
@@ -10,7 +9,7 @@ const Menu = () => {
 
     useEffect(() => {
 		//Write your get/fetch here
-		axios.get(`http://localhost:8000/foodtrucks/${id}`)
+		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
             .then((res) => {
                 setMenuItems(res.data.menu)
             })

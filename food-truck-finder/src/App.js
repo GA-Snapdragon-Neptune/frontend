@@ -3,16 +3,17 @@ import TruckList from './components/TruckList';
 import FoodTruck from './components/FoodTruck'
 import Register from './components/Register';
 import Login from './components/Login';
+import UserOld from './components/UserOld';
 import User from './components/User';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Welcome from './components/Welcome';
 
 function App() {
-  const userId = localStorage.getItem('id')
   return (
     <div>
+      
       <Routes>
-        {console.log(userId)}
+        
         <Route path='/' element={<Welcome />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />

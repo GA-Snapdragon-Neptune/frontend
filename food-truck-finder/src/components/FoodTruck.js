@@ -6,9 +6,7 @@ import axios from 'axios';
 import pinkfoodtruck from '../assets/pinkfoodtruck.jpg'
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
 import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
 
-import './foodtruck.css'
 
 const FoodTruck = () => {
     const navigate = useNavigate();
@@ -21,7 +19,7 @@ const FoodTruck = () => {
 
     //get all food truck data, only renders when [id] has changed
     useEffect(() => {
-		axios.get(`http://localhost:8000/foodtrucks/${id}`)
+		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
             .then((res) => {
                 setFoodTruck(res.data)
                 avgRating.current = res.data.ratings.reduce((a,b) => a+b,0)/res.data.ratings.length;
@@ -33,7 +31,7 @@ const FoodTruck = () => {
     const handleDelete = () => {
         axios({
             method: 'delete',
-            url:`http://localhost:8000/foodtrucks/${id}`,
+            url:`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` 
             }
@@ -50,7 +48,7 @@ const FoodTruck = () => {
 		event.preventDefault();
         axios({
             method: 'put',
-            url: `http://localhost:8000/foodtrucks/${id}`, 
+            url: `https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`, 
             data: foodTruck,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` 
@@ -60,18 +58,20 @@ const FoodTruck = () => {
                 setEdit(false)
             })
     };
-    
     //set edit state to true when clicking edit button
     const editFoodTruck = (e) => {
         e.preventDefault()
-        setEdit(true)
+        setEdit(!edit)
+    }
+
+    const exitEdit = () => {
+        setEdit(!edit)
     }
 
     //setfoodtruck state to new input on value change
     const handleChange = (event) => {
 		setFoodTruck({ ...foodTruck, [event.target.id]: event.target.value });
 	};
-
 
     //toggle between showing menu and showing reviews
     const [menu, setMenu] = useState(true)
@@ -95,17 +95,17 @@ const FoodTruck = () => {
     const [checkDelete, setCheckDelete] = useState(false)
 
     const checkForDelete = () => {
-        setCheckDelete(true)
+        setCheckDelete(!checkDelete)
     }
 
     const exitDelete = () => {
-        setCheckDelete(false)
+        setCheckDelete(!checkDelete)
     }
     
     return (
         <div className='h-full w-full'>
             
-            <nav className='bg-white flex justify-between items-center h-14 w-screen mx-auto px-2 text-black shadow-md z-50'>
+            <nav className='bg-[#7ed957] flex justify-between items-center h-12 w-screen mx-auto px-2 text-black shadow-md z-50'>
                 <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
 
                 <p className='font-extrabold text-xl'>GRUBTRUCK</p>
@@ -118,36 +118,44 @@ const FoodTruck = () => {
                 <img src={pinkfoodtruck} alt='pink food truck' className='mx-auto -z-10' />
             </div>
 
-                <div className='bg-white md:mt-20 mt-[-2rem] max-w-xl h-auto z-20 rounded-3xl shadow-xl pb-20'>
+            {/* md:mt-20 mt-[-2rem] max-w-xl md:w-full h-auto  */}
+                <div className='bg-white z-20 rounded-3xl shadow-xl pb-20 pt-5 px-3 md:px-5 w-full md:mt-10 h-screen'>
                 
                 {!edit && !(foodTruck.owner === localStorage.getItem('id')) ? 
                     <div className='px-4 py-4'>
-                        <h1 className='text-3xl font-bold'>{foodTruck.name}</h1>
+                        <h1 className='text-3xl font-bold text-[#7ed957]'>{foodTruck.name}</h1>
                         <ul className='text-md'>
                             <li>{foodTruck.location}</li>
-                            <Typography component="legend">Star Rating:</Typography>
+                            <li>Star Rating:</li>
                             <Rating name="read-only" value={rating} readOnly />
                             <li>hours:</li> 
                         </ul>
                     </div>
                 : 
+
                     <form onSubmit={handleEdit}>
-                        <h1><input
+                            <h1>
+                            <label htmlFor='name' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0'>Edit name</label>
+                                <input
+                            className='border'
                             type='text'
                             id='name'
                             placeholder={foodTruck.name}
                             onChange={handleChange} /></h1>
                         <ul>
-                            <li><input
+                                <li>
+                                <label htmlFor='location' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0 mt-2'>Edit Address</label>
+                                    <input
+                                        className='border'
                                 type='text'
                                 id='location'
                                 placeholder={foodTruck.location}
                                 onChange={handleChange} /></li>
-                            <Typography component="legend">Star Rating:</Typography>
+                            <li>Star Rating:</li>
                             <Rating name="read-only" value={rating} readOnly />
                             <li>hours:</li>
                         </ul>
-                        <button>Submit changes</button>
+                        <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 rounded'>Submit changes</button>
                     </form>
 
                     }
@@ -155,15 +163,15 @@ const FoodTruck = () => {
                 <div>
 
                     {(foodTruck.owner === localStorage.getItem('id')) ?
-                        <div>
-                            <button onClick={editFoodTruck}>edit foodtruck</button>
-                            <button onClick={checkForDelete}>delete foodtruck</button>
+                        <div className='my-5'>
+                            <button onClick={editFoodTruck} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 mx-5 rounded'>edit foodtruck</button>
+                            <button onClick={checkForDelete} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 rounded'>delete foodtruck</button>
                         </div> : null}
                     
                     {checkDelete ? <div>
-                        Are you sure you want to delete {foodTruck.name}?
-                        <button onClick={handleDelete}>confirm</button>
-                        <button onClick={exitDelete}>exit</button>
+                        <p className='text-md font-bold italic mt-5 mx-5'>Are you sure you want to delete {foodTruck.name}?</p>
+                        <button onClick={handleDelete} className='flex-shrink-0 bg-red-500 hover:bg-red-700 text-sm  text-white py-1 px-2 rounded mx-5'>confirm delete</button>
+                        <button onClick={exitDelete} className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-3 my-5 rounded'>exit</button>
                     </div> : null}
 
                 </div>

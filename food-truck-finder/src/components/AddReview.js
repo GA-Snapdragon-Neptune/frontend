@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import './form.css'
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
 
-const AddReview = ({id}) => {
+const AddReview = ({id, changeCount, setChangeCount}) => {
     const [rating, setRating] = useState(5);
     const initialReviewState = {
         title: '',
@@ -21,7 +20,7 @@ const AddReview = ({id}) => {
         e.preventDefault();
 		axios({
             method: 'post',
-            url:`http://localhost:8000/reviews`, 
+            url:`https://young-anchorage-22001.herokuapp.com/reviews`, 
             data: myReview,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` 
@@ -29,10 +28,11 @@ const AddReview = ({id}) => {
         })
         .then(() => {
             // navigate(`/foodtrucks/${id}`)
+            setChangeCount(changeCount + 1)
         })
         axios({
             method: 'put',
-            url:`http://localhost:8000/foodtrucks/${id}/rating`,
+            url:`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}/rating`,
             data: {rating: rating}
         })
         .then((res)=> {

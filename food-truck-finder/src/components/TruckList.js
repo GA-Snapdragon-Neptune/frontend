@@ -10,7 +10,7 @@ const TruckList = () => {
  
 
     useEffect(() => {
-		axios.get(`http://localhost:8000/foodtrucks/`)
+		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/`)
             .then((res) => {
                 setFoodTruckList(res.data)
             })
@@ -22,7 +22,7 @@ const TruckList = () => {
 
     return (
         <div>
-            <nav className='flex justify-between items-center h-14 w-screen mx-auto px-2 text-black shadow-md z-50'>
+            <nav className='bg-[#7ed957] flex justify-between items-center h-12 w-screen mx-auto px-2 text-black shadow-md z-50'>
                 <Link to='/'><BiArrowBack className='text-3xl' /></Link>
 
                 <p className='font-extrabold text-xl'>GRUBTRUCK</p>

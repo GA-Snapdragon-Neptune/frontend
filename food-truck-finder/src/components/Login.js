@@ -18,13 +18,12 @@ const Login = () => {
     const handleSubmit = async (event) => {
 		event.preventDefault();
         if (user.username !== '' && user.email !== '' && user.password !== ''){
-                axios.post("http://localhost:8000/users/signin", user)
+                axios.post("https://young-anchorage-22001.herokuapp.com/users/signin", user)
                 .then(res => {
                     console.log(res)
                     localStorage.setItem('token', res.data.token)
                     localStorage.setItem('id', res.data.id)
                     localStorage.setItem('role', res.data.role)
-                    console.log(localStorage.getItem('id'))
                     console.log(res.data.token)
                     if (res.data?.token) {
                         setSuccess(true)
@@ -37,7 +36,7 @@ const Login = () => {
     };
 
     return (
-        <div className='bg-gray-100 h-screen flex flex-col items-center'>
+        <div className='flex flex-col items-center bg-[#7ed957] h-screen'>
             {success ?
                     <>
                         <p>Log In Successfully!</p>
@@ -47,9 +46,10 @@ const Login = () => {
                 :
                     <>
                         {errMsg && <p>{errMsg}</p>}
-                        <h1>Log In</h1>
-                        <form onSubmit={handleSubmit} className='border w-2/4 p-5 bg-white flex flex-col'>
-                            <label htmlFor='username'>Username: </label>
+                    <div className='flex flex-col justify-center items-center w-3/4 md:w-1/4 h-3/4 mt-20 shadow-lg rounded-lg bg-white'>
+                    <h1 className='font-bold text-2xl mb-20'>Log In</h1>
+                        <form onSubmit={handleSubmit} className='w-3/4 h-1/2 bg-white flex flex-col '>
+                            <label htmlFor='username' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Username: </label>
                             <input
                                 type='text'
                                 id='username'
@@ -59,7 +59,7 @@ const Login = () => {
                             required
                             className='border'
                             />
-                            <label htmlFor='email'>Email: </label>
+                            <label htmlFor='email' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Email: </label>
                             <input
                                 type='text'
                                 id='email'
@@ -68,7 +68,7 @@ const Login = () => {
                             required
                             className='border'
                             />
-                            <label htmlFor='password'>Password: </label>
+                            <label htmlFor='password' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Password: </label>
                             <input
                                 type='password'
                                 id='password'
@@ -78,13 +78,15 @@ const Login = () => {
                             className='border'
                             />
                             <br></br>
-                            <button className='bg-black text-white px-4'>Sign In</button>
+                            <button className='bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-8 mb-5 border rounded-lg'>Sign In</button>
                         </form>
-                    <div className='mt-10 text-center'>
+                        <Link to='/foodtrucks' className='text-sm mt-20'>continue as guest</Link>
+                        </div>
+                    <div className='mt-5 text-center'>
                     <p>
                                 Need an Account? <br></br>
                             <span>
-                                <Link to="/register" className='bg-black text-white px-4'>Sign Up</Link>
+                                <Link to="/register" className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-3 my-5 rounded'>Sign Up</Link>
                             </span>
                         </p>
                        </div>

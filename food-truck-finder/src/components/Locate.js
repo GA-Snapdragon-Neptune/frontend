@@ -1,5 +1,4 @@
 import React from 'react';
-import { IoNavigate } from 'react-icons/io5'
 
 const Locate = ({ panTo }) => {
     return (

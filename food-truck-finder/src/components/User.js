@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import AddFoodTruck from "./AddFoodTruck";
 import { Link, useNavigate } from "react-router-dom";
+import { BiArrowBack } from 'react-icons/bi'
 
 const User = () => {
     let navigate = useNavigate()
@@ -10,7 +11,7 @@ const User = () => {
     const handleDelete = () => {
         axios({
             method: 'delete',
-            url:`http://localhost:8000/users/${localStorage.getItem('id')}`,
+            url:`https://young-anchorage-22001.herokuapp.com/users/${localStorage.getItem('id')}`,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` 
             }
@@ -29,6 +30,7 @@ const User = () => {
     const checkForDelete = () => {
         setCheckDelete(true)
     }
+
     const exitDelete = () => {
         setCheckDelete(false)
     }
@@ -56,7 +58,7 @@ const User = () => {
         if (email) data.email = email
         axios({
             method: 'put',
-            url:`http://localhost:8000/users/${localStorage.getItem('id')}`,
+            url:`https://young-anchorage-22001.herokuapp.com/users/${localStorage.getItem('id')}`,
             data: data,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` 
@@ -73,8 +75,13 @@ const User = () => {
         localStorage.clear()
         navigate('/')
     }
+
     return (
-        <div className='flex flex-col justify-center items-center border'>
+        <div className='flex flex-col justify-center items-center'>
+            <nav className='flex justify-between items-center h-12 w-screen mx-auto px-2 bg-[#7ed957]'>
+                <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
+
+            </nav>
             {localStorage.getItem('id') ? 
                 <>
                     {deleted ? 
@@ -156,7 +163,10 @@ const User = () => {
                     }
                 </>
             :
-                <Link to="/login" className='bg-black text-white px-3'>Please Sign In</Link>
+                <div className='flex flex-col justify-center items-center w-3/4 md:w-1/4 h-3/4 mt-20 shadow-lg rounded-lg bg-white'>
+                    <h1 className='font-bold mb-5'>Oops! You're not logged in.</h1>
+                    <Link to="/login" className='bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-8 mb-5 border rounded-lg'>Please Sign In</Link>
+                </div>
             }
         </div>
     );

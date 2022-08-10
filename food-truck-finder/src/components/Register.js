@@ -79,7 +79,7 @@ const Register = () => {
         try {
             await axios({
                 method: 'post',
-                url: 'http://localhost:8000/users/signup',
+                url: 'https://young-anchorage-22001.herokuapp.com/users/signup',
                 data: registerUser
             })
             .then((res) => {
@@ -101,11 +101,12 @@ const Register = () => {
     };
 
     return (
-        <div className='bg-gray-100 h-screen flex flex-col items-center'>
+        <div className='flex flex-col items-center bg-[#7ed957] h-screen'>
             <p id="errMsg" ref={errRef} className={errMsg ? "shown text-red-300" : "hidden"}>{errMsg}</p>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit} className='border w-2/4 p-5 bg-white flex flex-col'>
-                <label htmlFor='username'>Username: </label>
+            <div className='flex flex-col justify-center items-center w-3/4 md:w-1/4 h-3/4 mt-20 shadow-lg rounded-lg bg-white'>
+            <h1 className='font-bold text-2xl mb-20'>Sign Up</h1>
+            <form onSubmit={handleSubmit} className='w-3/4 h-1/2 bg-white flex flex-col'>
+                <label htmlFor='username' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Username: </label>
                 <input
                     className='border'
                     type='text'
@@ -123,7 +124,7 @@ const Register = () => {
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
                 </p>
-                <label htmlFor='email'>Email: </label>
+                <label htmlFor='email' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Email: </label>
                 <input
                     className='border'
                     type='text'
@@ -133,7 +134,7 @@ const Register = () => {
                     value={email}
                     required
                 />
-                <label htmlFor='password'>Password: </label>
+                <label htmlFor='password' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Password: </label>
                 <input
                     className='border'
                     type='password'
@@ -150,7 +151,7 @@ const Register = () => {
                             a number and a special character.<br />
                             Allowed special characters: ? ! @ # $ %
                 </p>
-                <label htmlFor="confirm_pwd">Confirm Password:</label>
+                <label htmlFor="confirm_pwd" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Confirm Password:</label>
                 <input
                     className='border'
                     type="password"
@@ -165,24 +166,25 @@ const Register = () => {
                     Must match the first password input field.
                 </p>
                 <br></br>
-                <select onChange={handleRole}>
+                <select onChange={handleRole} className='border'>
                     <option id="consumer" value="consumer">Consumer</option>
                     <option id="business" value="business">Business</option>
                 </select>
                 <br></br>
-                <button className='bg-black text-white px-3'>Sign Up</button>
-           </form>
+                <button className='bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-8 mb-5 border rounded-lg'>Sign Up</button>
+                </form>
+                <Link to='/foodtrucks' className='text-sm mt-20'>continue as guest</Link>
+        </div>
            {success &&
                 <>
                     <p>Successfully Registered!</p>
                     <Link to="/login">Sign In</Link>
                 </>
             }
-            <div className='mt-10 text-center'>
+            <div className='mt-5 text-center'>
                 <h1>Returning User?</h1>
-                <Link to="/login" className='bg-black text-white px-3'>Sign In</Link>
+                <Link to="/login" className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-3 my-5 rounded'>Sign In</Link>
             </div>
-            <Link to='/foodtrucks' className='text-xs mt-20'>continue as guest</Link>
         </div>
     );
 };
