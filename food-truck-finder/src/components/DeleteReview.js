@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const DeleteReview = ({foodTruckId, review}) => {
+const DeleteReview = ({foodTruckId, review, changeCount, setChangeCount}) => {
     const handleDelete = (reviewId) => {
         axios({method:'delete',
             url:`https://young-anchorage-22001.herokuapp.com/reviews/${foodTruckId}/${reviewId}`,
@@ -9,18 +9,19 @@ const DeleteReview = ({foodTruckId, review}) => {
                 Authorization: `Bearer ${localStorage.getItem('token')}` 
             }
         })
+        .then(() => {setChangeCount(changeCount + 1)})
     }
     const [checkDelete, setCheckDelete] = useState(false)
 
     const checkForDelete = () => {
-        setCheckDelete(true)
+        setCheckDelete(!checkDelete)
     }
     const exitDelete = () => {
         setCheckDelete(false)
     }
     return(
         <div className="del-review">
-            <button type="button" onClick={checkForDelete}>Delete Review</button>
+            <button type="button" onClick={checkForDelete} className='bg-black text-sm text-white py-1 px-2 rounded'>Delete Review</button>
             {checkDelete ? 
                 <div>
                 <p>Are you sure you want to delete ?</p>

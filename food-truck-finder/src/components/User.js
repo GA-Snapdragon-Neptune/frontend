@@ -168,7 +168,7 @@ const User = () => {
                     }
                 </>
             :
-                <div className='flex flex-col justify-center items-center w-3/4 md:w-1/4 h-3/4 mt-20 shadow-lg rounded-lg bg-white'>
+                <div className='flex flex-col justify-center items-center h-3/4 mt-20'>
                     <h1 className='font-bold mb-5'>Oops! You're not logged in.</h1>
                     <Link to="/login" className='bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-8 mb-5 border rounded-lg'>Please Sign In</Link>
                 </div>

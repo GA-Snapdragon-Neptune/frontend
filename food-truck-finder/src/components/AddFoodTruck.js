@@ -28,6 +28,7 @@ const AddFoodTruck = () => {
         data[index][event.target.name] = event.target.value
         setMenus(data)
     };
+
     const addFields = () => {
         let object = {
             name: '',
@@ -36,13 +37,15 @@ const AddFoodTruck = () => {
         }
     
         setMenus([...menus, object])
-      }
+    }
+    
     const removeFields = (index) => {
         let data = [...menus];
         data.splice(index, 1)
         setMenus(data)
     }
 
+    
 	const handleSubmit = (event) => {
 		event.preventDefault();
         setNewFoodTruck({ ...newFoodTruck, menu: menus });
