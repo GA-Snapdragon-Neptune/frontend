@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Grub Truck
+Business owner or love going to food truck to eat ? Want to add your own personal business food truck ? Want make a reviews of the delicious or disgusting food you had from a food truck ? Grub Truck is great for you as a  business food truck owner or person who loves going to food truck and make reviews.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Grub Truck Goal
+Grub Truck creates a streamlined relationship between business owner and users. Our website allows business owners to create, add and edit their food truck and menu while users can search into their menu and make a review about the food the recently had from that food truck. User can also search for the food truck which they are craving for. 
 
-In the project directory, you can run:
+![giphy](https://user-images.githubusercontent.com/101943583/183976319-ef339ab6-cfd4-4756-89be-b4e245cdf5c8.gif)
 
-### `npm start`
+# Grub Truck Group Members
+Kenny U
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Luxe Hahn
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Taylor Sturgill
 
-### `npm test`
+Kenan Kong
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# User Stories
 
-### `npm run build`
+### Users - I want to
+ - Create a user profile
+ - Create a review for a food truck
+ - Read reviews
+ - Edit users review
+ - Delete users review
+ - See images of the food and menu choices
+ - Search for a certain dish
+ - Find where a food truck is located based on date (as it may change)
+ - Search for food trucks in my area, and share my experience
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Business Owner - I want to
+ - Create a food truck business profile
+ - Add business food truck
+ - Add food and menu
+ - Edit food and menu
+ - Delete food, menu, or food truck
+ - Show location where the food truck going to be at
+ - See images of their food and menu
+ 
+# MVP 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Create database API
+ - RESTful architecture
+ - CRUD
+### React App
+ - At least 4 components
+ - Communicates with backnd
+ - Mobile Responsive 
+ 
+# Wireframes
+![eb01ba06-bb42-41c9-a381-d7c56b82dc85](https://user-images.githubusercontent.com/101943583/183979546-5b600862-f191-45c2-ba14-02ed061c54e4.jpeg)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# List of Models and Properties
+### User
+- Username
+- Password
+- Email
+ 
+### Food Trucks
+ - Name
+ - Location
+ - Menu
+ - etc.
+ 
+### Reviews
+ - Title
+ - Body
+ - Author
+ 
+# Technologies used
+Front end is built with React, JavaScript, Axios, CSS, and Tailwind. 
+ 
