@@ -62,7 +62,7 @@ const FoodTruck = () => {
     //set edit state to true when clicking edit button
     const editFoodTruck = (e) => {
         e.preventDefault()
-        setEdit(!edit)
+        setEdit(true)
     }
 
     const exitEdit = () => {
@@ -103,6 +103,7 @@ const FoodTruck = () => {
         setCheckDelete(!checkDelete)
     }
     
+
     return (
         <div className='h-full w-full'>
             
@@ -155,7 +156,7 @@ const FoodTruck = () => {
                             <li>star rating:</li>
                             <li>hours:</li>
                         </ul>
-                        <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 rounded'>Submit changes</button>
+                        <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 rounded' onClick={() => setEdit(false)}>Submit changes</button>
                     </form>
 
                     }
@@ -164,7 +165,7 @@ const FoodTruck = () => {
 
                     {(foodTruck.owner === localStorage.getItem('id')) ?
                         <div className='my-5'>
-                            <button onClick={editFoodTruck} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 mx-5 rounded'>edit foodtruck</button>
+                            {/* <button onClick={editFoodTruck} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 mx-5 rounded'>edit foodtruck</button> */}
                             <button onClick={checkForDelete} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 rounded'>delete foodtruck</button>
                         </div> : null}
                     

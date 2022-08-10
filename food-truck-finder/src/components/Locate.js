@@ -13,7 +13,7 @@ const Locate = ({ panTo }) => {
                    })
                }, () => null) 
             }}>
-               show results for my location
+               show food trucks near me
             </button>
         </div>
     );

@@ -144,7 +144,7 @@ const User = () => {
                                         </div>
                             </>
                         :
-                            <p>user updated</p>
+                            <p className='font-bold'>user updated</p>
                     
                         }
                     </div> 
@@ -152,7 +152,7 @@ const User = () => {
                     null
                 }
                 <br></br>
-                <button onClick={checkForDelete} className='font-bold border-b w-full text-left w-3/4'>Delete User</button>
+                <button onClick={checkForDelete} className='font-bold border-b text-left w-3/4'>Delete User</button>
                 {checkDelete ? 
                     <div>
                         <p className='text-[#7ed957] text-md font-bold italic mb-5'>Are you sure you want to delete?</p>

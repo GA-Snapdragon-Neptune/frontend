@@ -3,6 +3,7 @@ import axios from "axios";
 import AddFoodTruck from "./AddFoodTruck";
 import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack } from 'react-icons/bi'
+import logo from '../assets/Grubtruck.png'
 
 const User = () => {
     let navigate = useNavigate()
@@ -78,26 +79,29 @@ const User = () => {
     }
 
     return (
-        <div className='flex flex-col justify-center items-center'>
+        <>
             <nav className='flex justify-between items-center h-12 w-screen mx-auto px-2 bg-[#7ed957]'>
                 <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
 
             </nav>
+            <div className='flex justify-center bg-[#7ed957] h-screen overflow-hidden'>
+        <div className='shadow-xl rounded-lg bg-white my-20 mx-auto w-3/4 lg:w-1/2 h-5/6 fixed px-10 pb-20 overflow-auto'>
             {localStorage.getItem('id') ? 
                 <>
                     {deleted ? 
                         <p>Account Deleted</p>
                         :
                         <>
-                        <h1 className='font-bold text-3xl mb-10 border-b text-[#7ed957]'>Welcome!</h1>
-                        <button onClick={checkForUpdate} className='hover:bg-[#7ed957] rounded-lg px-5 mb-5'>Edit User Info</button>
+                        <button onClick={signOut} className='font-bold text-xl text-[#7ed957] w-3/4 text-left mt-10'>Sign Out</button>
+                        <button onClick={checkForUpdate} className='font-bold border-b w-3/4 text-left mt-10'>Edit User Info</button>
                         {checkUpdate ? 
                             <div>
                                 {!updated ?
                                     <>
-                                        <form className='px-5'>
-                                            <p className='text-sm'>populate fields you would like to update</p>
-                                            <label htmlFor='username'>Username: </label>
+                                                    <form className='w-3/4'>
+                                                    <div className="flex flex-col">
+                                            <p className='text-[#7ed957] text-xs italic mb-5'>populate fields you would like to update</p>
+                                            <label htmlFor='username' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Username: </label>
                                                     <input
                                                         className='border'
                                                     type='text'
@@ -108,7 +112,7 @@ const User = () => {
                                                     required
                                                 />
                                                 <br></br>
-                                                <label htmlFor='email'>Email: </label>
+                                                <label htmlFor='email' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Email: </label>
                                                     <input
                                                         className='border'
                                                     type='text'
@@ -119,7 +123,7 @@ const User = () => {
                                                     required
                                                 />
                                                 <br></br>
-                                                <label htmlFor='password'>Password: </label>
+                                                <label htmlFor='password' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Password: </label>
                                                     <input
                                                         className='border'
                                                     type='password'
@@ -128,11 +132,12 @@ const User = () => {
                                                     value={pwd}
                                                     required
                                                 />
-                                                <br></br>
+                                                            <br></br>
+                                                            </div>
                                                 </form>
-                                            <div className='mt-5'>
-                                            <button onClick={handleSubmit} className='hover:bg-[#7ed957] border rounded-lg px-5'>Submit</button>
-                                            <button onClick={exitUpdate} className='hover:bg-[#7ed957] border rounded-lg px-5'>Cancel</button>
+                                            <div>
+                                            <button onClick={handleSubmit} className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 rounded'>Submit</button>
+                                            <button onClick={exitUpdate} className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 ml-5 rounded'>Cancel</button>
                                             </div>
                                     </>
                                 :
@@ -144,14 +149,13 @@ const User = () => {
                             null
                         }
                         <br></br>
-                        <button onClick={checkForDelete} className='hover:bg-[#7ed957] rounded-lg px-5 mb-5'>Delete User</button>
-                        <button onClick={signOut} className='hover:bg-[#7ed957] rounded-lg px-5 mb-5'>Sign Out</button>
+                        <button onClick={checkForDelete} className='font-bold border-b text-left w-3/4'>Delete User</button>
                         {checkDelete ? 
                             <div>
-                                <p>Are you sure you want to delete ?</p>
-                                <button onClick={handleDelete} className='hover:bg-[#7ed957] border rounded-lg px-5'>Confirm</button>
-                                <button onClick={exitDelete} className='hover:bg-[#7ed957] border rounded-lg px-5'>Cancel</button>
-                            </div> 
+                            <p className='text-[#7ed957] text-md font-bold italic mb-5'>Are you sure you want to delete?</p>
+                            <button onClick={handleDelete} className='flex-shrink-0 bg-red-500 hover:bg-red-700 text-sm  text-white py-1 px-2 rounded'>Confirm</button>
+                            <button onClick={exitDelete} className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-2 ml-5 rounded'>Cancel</button>
+                        </div> 
                             : 
                             null
                         }
@@ -168,8 +172,11 @@ const User = () => {
                     <h1 className='font-bold mb-5'>Oops! You're not logged in.</h1>
                     <Link to="/login" className='bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-8 mb-5 border rounded-lg'>Please Sign In</Link>
                 </div>
-            }
-        </div>
+                    }
+                    </div>
+                <div className='w-3/4 md:w-1/2 h-40 flex justify-center absolute top-0'><img src={logo} alt='logo' className=''/></div>
+            </div>
+        </>
     );
 };
 
