@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AddFoodTruck from "./AddFoodTruck";
+import logo from '../assets/Grubtruck.png'
 
 const User = () => {
     useEffect(() => {
@@ -80,21 +81,23 @@ const User = () => {
         })
     }
     return (
-        <div className='flex flex-col justify-center items-center border'>
-        <div>
+        <div className='flex justify-center bg-[#7ed957] h-screen'>
+        <div className='shadow-xl rounded-lg bg-white my-10 mx-auto w-3/4 lg:w-1/2 h-5/6 fixed px-10 pb-20 overflow-auto'>
             {deleted ? 
                 <p>Account Deleted</p>
                 :
-                <>
-                <h1 className='font-bold text-3xl mb-10 border-b text-[#7ed957]'>Welcome!</h1>
-                <button onClick={checkForUpdate} className='hover:bg-[#7ed957] rounded-lg px-5 mb-5'>Edit User Info</button>
-                {checkUpdate ? 
-                    <div>
+                    <>
+                        <div className='h-32 top-0'></div>
+                <button onClick={checkForUpdate} className='font-bold border-b w-full text-left'>Edit User Info</button>
+                    {checkUpdate ? 
+                        <div>
                         {!updated ?
                             <>
-                                <form className='px-5'>
-                                    <p className='text-sm'>populate fields you would like to update</p>
-                                    <label htmlFor='username'>Username: </label>
+                                        
+                                    <form className='w-3/4'>
+                                        <div class="flex flex-col">
+                                    <p className='text-[#7ed957] text-xs italic mb-5'>populate fields you would like to update</p>
+                                    <label htmlFor='username' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Username: </label>
                                             <input
                                                 className='border'
                                             type='text'
@@ -105,7 +108,7 @@ const User = () => {
                                             required
                                         />
                                         <br></br>
-                                        <label htmlFor='email'>Email: </label>
+                                        <label htmlFor='email' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Email: </label>
                                             <input
                                                 className='border'
                                             type='text'
@@ -116,7 +119,7 @@ const User = () => {
                                             required
                                         />
                                         <br></br>
-                                        <label htmlFor='password'>Password: </label>
+                                        <label htmlFor='password' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Password: </label>
                                             <input
                                                 className='border'
                                             type='password'
@@ -125,12 +128,13 @@ const User = () => {
                                             value={pwd}
                                             required
                                         />
-                                        <br></br>
-                                        </form>
-                                    <div className='mt-5'>
-                                    <button onClick={handleSubmit} className='hover:bg-[#7ed957] border rounded-lg px-5'>Submit</button>
-                                    <button onClick={exitUpdate} className='hover:bg-[#7ed957] border rounded-lg px-5'>Cancel</button>
+                                                <br></br>
                                     </div>
+                                    </form>
+                                        <div>
+                                            <button onClick={handleSubmit} className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 rounded'>Submit</button>
+                                            <button onClick={exitUpdate} className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 ml-5 rounded'>Cancel</button>
+                                        </div>
                             </>
                         :
                             <p>user updated</p>
@@ -141,20 +145,21 @@ const User = () => {
                     null
                 }
                 <br></br>
-                <button onClick={checkForDelete} className='hover:bg-[#7ed957] rounded-lg px-5 mb-5'>Delete User</button>
+                <button onClick={checkForDelete} className='font-bold border-b w-full text-left'>Delete User</button>
                 {checkDelete ? 
                     <div>
-                        <p>Are you sure you want to delete ?</p>
-                        <button onClick={handleDelete} className='hover:bg-[#7ed957] border rounded-lg px-5'>Confirm</button>
-                        <button onClick={exitDelete} className='hover:bg-[#7ed957] border rounded-lg px-5'>Cancel</button>
+                        <p className='text-[#7ed957] text-md font-bold italic mb-5'>Are you sure you want to delete?</p>
+                        <button onClick={handleDelete} className='flex-shrink-0 bg-red-500 hover:bg-red-700 text-sm  text-white py-1 px-2 rounded'>Confirm</button>
+                        <button onClick={exitDelete} className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-2 ml-5 rounded'>Cancel</button>
                     </div> 
                     : 
                     null
-                }
+                        }
+            <AddFoodTruck/>
                 </>
             }
             </div>
-            <AddFoodTruck/>
+            <div className='w-full h-40 flex justify-center absolute top-0'><img src={logo} alt='logo' className=''/></div>
         </div>
     );
 };

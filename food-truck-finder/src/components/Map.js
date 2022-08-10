@@ -1,12 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import {
   GoogleMap,
   useLoadScript,
   MarkerF,
   InfoWindow,
 } from '@react-google-maps/api';
-import axios
-  from 'axios';
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+
 import Locate from './Locate';
 
   const mapContainerStyle = {
@@ -24,7 +28,7 @@ import Locate from './Locate';
     zoomControl: true,
   }
 
-const Map = ({ addressesArr }) => {
+const Map = ({ foodTruckList }) => {
 
     const [libraries] = useState(['places']);
     const {isLoaded, loadError} = useLoadScript({
@@ -34,24 +38,29 @@ const Map = ({ addressesArr }) => {
     
   const [markers, setMarkers] = useState([])
   const [selected, setSelected] = useState(null)
-
-
-  //parse the addresses into coordinates to display on the map
-  const getCoordinates = useCallback(() => {
-        addressesArr.map((address) => {
-          return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
-            .then((res) => {
-              const { lat, lng } = res.data.results[0].geometry.location
-                setMarkers(current => [...current, { lat, lng }])
-            })
-          })
-    }, [addressesArr]);
-    
-    useEffect(() => {
-        getCoordinates()
-    }, [getCoordinates])
+  const [name, setName] = useState([])
 
   
+  //parse the addresses into coordinates to display on the map
+  const getCoordinates =
+  useCallback(() => {
+    foodTruckList.map((foodtruck) => {
+        const coordinates = {
+              address: foodtruck.location
+            }
+            getGeocode(coordinates)
+            .then((results) => {
+              const { lat, lng } = getLatLng(results[0]);
+      setMarkers(current => [...current, { name: foodtruck.name, address: foodtruck.location, id: foodtruck._id, lat, lng }])
+        })
+      })
+  }, [foodTruckList]);
+
+  useEffect(() => {
+      getCoordinates()
+    }, [getCoordinates])
+
+ 
   //a reference to the map instance
   //accessible anywhere in code - state is to rerender, ref is to use state without re rendering
   const mapRef = useRef()
@@ -95,27 +104,28 @@ const Map = ({ addressesArr }) => {
                         }}
                     onClick={() => {
                       setSelected(marker)
-                      console.log(marker)
+                      
                   }}
                     />
                 ))}
           
-          {selected ? (
-          <InfoWindow
-          position={{ lat: selected.lat, lng: selected.lng }}
-          onCloseClick={() => {
-          setSelected(null)
-        }}>
-          <div>
-            <h2>Food Truck location</h2>
-          </div>
-        </InfoWindow>
-        ) : null}
+            {selected ? (
+            <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={() => {
+            setSelected(null)
+          }}>
+              <div>
+                <Link to={`/foodtrucks/${selected.id}`} className='font-bold underline cursor-pointer'>{selected.name}</Link>
+                <p>{selected.address}</p>
+            </div>
+          </InfoWindow>
+          ) : null }
 
         </GoogleMap> 
 
         </div>
     );
-  };
+  }
   
   export default Map;
