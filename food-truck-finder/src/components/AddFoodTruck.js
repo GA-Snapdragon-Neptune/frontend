@@ -27,6 +27,7 @@ const AddFoodTruck = () => {
         let data = [...menus]
         data[index][event.target.name] = event.target.value
         setMenus(data)
+        setNewFoodTruck({ ...newFoodTruck, menu: menus });
     };
     const addFields = () => {
         let object = {
@@ -45,7 +46,6 @@ const AddFoodTruck = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-        setNewFoodTruck({ ...newFoodTruck, menu: menus });
 		axios({
             method: 'post',
             url:`https://young-anchorage-22001.herokuapp.com/foodtrucks`,
