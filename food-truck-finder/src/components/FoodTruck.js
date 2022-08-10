@@ -16,7 +16,7 @@ const FoodTruck = () => {
 
     //get all food truck data, only renders when [id] has changed
     useEffect(() => {
-		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
+		axios.get(`http://localhost:8000/foodtrucks/${id}`)
             .then((res) => {
                 setFoodTruck(res.data)
             })
@@ -24,7 +24,7 @@ const FoodTruck = () => {
     
     //delete a foodtruck, navigate back to food trucks list
     const handleDelete = () => {
-		axios.delete(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
+		axios.delete(`http://localhost:8000/foodtrucks/${id}`)
 			.then((res) => {
 			console.log(`${res.data} was deleted`)
 		})
@@ -40,7 +40,7 @@ const FoodTruck = () => {
     //edit a food truck, set Edit state to false
     const handleEdit = (event) => {
 		event.preventDefault();
-        axios.put(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`, foodTruck)
+        axios.put(`http://localhost:8000/foodtrucks/${id}`, foodTruck)
             .then((res) => {
                 setEdit(false)
             })

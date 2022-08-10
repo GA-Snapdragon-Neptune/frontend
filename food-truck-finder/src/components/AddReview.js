@@ -9,7 +9,7 @@ const AddReview = ({id}) => {
     const initialReviewState = {
         title: '',
         body: '',
-        author: '62ed652c9d3864f3942ad6c4',
+        author: localStorage.getItem('id'),
         foodTruckId: id
     }
     const [myReview, setMyReview] = useState(initialReviewState)
@@ -18,7 +18,7 @@ const AddReview = ({id}) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-		axios.post(`https://young-anchorage-22001.herokuapp.com/reviews`, myReview)
+		axios.post(`http://localhost:8000/reviews`, myReview)
             .then(() => {
                 // navigate(`/foodtrucks/${id}`)
             })

@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const DeleteReview = ({foodTruckId, reviewId}) => {
     const navigate = useNavigate()
     const handleDelete = async (e) => {
-        await axios.delete(`https://young-anchorage-22001.herokuapp.com/reviews/${foodTruckId}/${reviewId}`)
+        await axios.delete(`http://localhost:8000/reviews/${foodTruckId}/${reviewId}`)
         .then (() => {
             navigate(`/foodtrucks/${foodTruckId}`)
         })

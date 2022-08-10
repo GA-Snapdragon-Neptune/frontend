@@ -4,24 +4,23 @@ import axios from 'axios';
 import './reviews.css'
 import AddReview from './AddReview';
 import EditReviewForm from './EditReviewForm';
+import { Link } from 'react-router-dom';
 
 const Reviews = () => {
-
     const { id } = useParams()
     const [reviewList, setReviewList] = useState([])
 
     useEffect(() => {
 		//Write your get/fetch here
-		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
+		axios.get(`http://localhost:8000/foodtrucks/${id}`)
             .then((res) => {
                 setReviewList(res.data.reviews)
-                console.log(res.data.reviews)
             })
-	}, [id]);
+	}, [id, reviewList.length]);
 
     // delete review
     const handleDelete = (reviewId) => {
-        axios.delete(`https://young-anchorage-22001.herokuapp.com/reviews/${id}/${reviewId}`)
+        axios.delete(`http://localhost:8000/reviews/${id}/${reviewId}`)
         .then ((res) => {
             console.log(res)
         })
@@ -29,14 +28,14 @@ const Reviews = () => {
     
     return (
         <div>
-            <AddReview 
-            id={id}
-            />
+            {localStorage.getItem('id') ?
+                <AddReview id={id}/>
+            : <Link to="/login" className='text-red-300'>sign in to leave a review!</Link>
+            }
             {reviewList.map((review) => (
                 <div key={review._id}>
                     <h3>{review.title}</h3>
                     <p>{review.body}</p>
-                    {console.log(localStorage.getItem('id'))}
                     {review.author.toString() === localStorage.getItem('id') ? 
                         <div className='edit-delete'>
                             <div className="del-review">

@@ -10,7 +10,7 @@ const Menu = () => {
 
     useEffect(() => {
 		//Write your get/fetch here
-		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
+		axios.get(`http://localhost:8000/foodtrucks/${id}`)
             .then((res) => {
                 setMenuItems(res.data.menu)
             })

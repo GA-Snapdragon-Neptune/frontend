@@ -10,7 +10,7 @@ const TruckList = () => {
  
 
     useEffect(() => {
-		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/`)
+		axios.get(`http://localhost:8000/foodtrucks/`)
             .then((res) => {
                 setFoodTruckList(res.data)
             })

@@ -15,7 +15,7 @@ const EditReviewForm = ({review}) => {
     }
     const handleEdit = (id) => {
         setEditedReview({...editedReview, reviewId: id})
-        axios.put(`https://young-anchorage-22001.herokuapp.com/reviews/${id}`, editedReview)
+        axios.put(`http://localhost:8000/reviews/${id}`, editedReview)
     } 
     return( 
         <>

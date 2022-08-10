@@ -1,0 +1,21 @@
+.form {
+    margin: 27vh;
+    text-align: center;
+    /* justify-content: center; */
+}
+
+.form-box {
+    width: 70vh;
+    height: 3vh;
+}
+
+.submit-button {
+    justify-items: center;
+    text-align: center;
+    margin-top: 2vh;
+    margin-left: 27vh;
+}
+/* .input {
+    padding-bottom: 40%;
+
+} */

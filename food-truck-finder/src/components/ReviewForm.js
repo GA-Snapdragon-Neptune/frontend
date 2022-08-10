@@ -10,7 +10,7 @@ const ReviewForm = () => {
 
     useEffect(() => {
 		//Write your get/fetch here
-		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
+		axios.get(`http://localhost:8000/foodtrucks/${id}`)
             .then((res) => {
                 setMyForm(res.data.reviews)
             })

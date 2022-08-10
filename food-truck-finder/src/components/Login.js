@@ -23,6 +23,7 @@ const Login = () => {
                     console.log(res)
                     localStorage.setItem('token', res.data.token)
                     localStorage.setItem('id', res.data.id)
+                    console.log(localStorage.getItem('id'))
                     console.log(res.data.token)
                     if (res.data?.token) {
                         setSuccess(true)

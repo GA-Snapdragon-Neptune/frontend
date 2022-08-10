@@ -5,7 +5,7 @@ import axios from "axios";
 const UpdateReview = () => {
     const navigate = useNavigate()
     const handleEdit = (e) => {
-        // navigate(`https://young-anchorage-22001.herokuapp.com/reviews/reviewsEdit`)
+        // navigate(`http://localhost:8000/reviews/reviewsEdit`)
     } 
     const [edit, setEdit] = useState(false)
     const [editedReview, setEditedReview] = useState({

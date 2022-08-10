@@ -80,7 +80,7 @@ const Register = () => {
             await axios({
                 method: 'post',
                 url: 'http://localhost:8000/users/signup',
-                data: newUser
+                data: registerUser
             })
             .then((res) => {
                 if (res.status === 201) setSuccess(true)
