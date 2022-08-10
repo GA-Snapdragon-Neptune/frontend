@@ -1,16 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import AddFoodTruck from "./AddFoodTruck";
 import { Link, useNavigate } from "react-router-dom";
 
 const User = () => {
     let navigate = useNavigate()
-    useEffect(() => {
-        axios.get('http://localhost:8000/users')
-        .then(res => {
-            const found = res.data.find((user) => user._id === localStorage.getItem('id'))
-        })
-    }, [])
 
     // delete
     const handleDelete = () => {

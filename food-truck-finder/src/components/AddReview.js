@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './form.css'
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
 
 const AddReview = ({id}) => {
-    const navigate = useNavigate()
+    const [rating, setRating] = useState(5);
     const initialReviewState = {
         title: '',
         body: '',
@@ -26,17 +27,31 @@ const AddReview = ({id}) => {
                 Authorization: `Bearer ${localStorage.getItem('token')}` 
             }
         })
-            .then(() => {
-                // navigate(`/foodtrucks/${id}`)
-            })
-        setMyReview(initialReviewState)
-        
+        .then(() => {
+            // navigate(`/foodtrucks/${id}`)
+        })
+        axios({
+            method: 'put',
+            url:`http://localhost:8000/foodtrucks/${id}/rating`,
+            data: {rating: rating}
+        })
+        .then((res)=> {
+            console.log(res)
+        })
+            setMyReview(initialReviewState)
 	};
 
     return (
-            <form className="sign-up">
-            <div>
-                <label htmlFor="title">title</label>
+            <form className="flex flex-col">
+                <Typography component="legend">Rating</Typography>
+                <Rating
+                    name="rating-controlled"
+                    value={rating}
+                    onChange={(event, newValue) => {
+                        setRating(newValue);
+                    }}
+                />
+                <label htmlFor="title">Review Title</label>
                 <input 
                     className="title-box" 
                     placeholder="Review Title"
@@ -44,7 +59,7 @@ const AddReview = ({id}) => {
                     value={myReview.title}
                     onChange={handleChange}>
                 </input>
-                <label htmlFor="body">body</label>
+                <label htmlFor="body">Body</label>
                 <input 
                     className="body-box"
                     placeholder="Review Content"
@@ -52,15 +67,12 @@ const AddReview = ({id}) => {
                     value={myReview.body}
                     onChange={handleChange}>
                 </input>
-            </div>
-            <div>
                 <button 
                     className="submit-button" 
                     onClick={handleSubmit}
                     onChange={(e) => setMyReview(e.target.value)}
                 >Submit Review</button>
-            </div>
-            </form>
+        </form>
     )
 }
 

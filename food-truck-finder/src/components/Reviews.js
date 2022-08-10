@@ -1,37 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './reviews.css'
 import AddReview from './AddReview';
 import EditReviewForm from './EditReviewForm';
-import { Link } from 'react-router-dom';
+import DeleteReview from './DeleteReview';
 
 const Reviews = () => {
     const { id } = useParams()
     const [reviewList, setReviewList] = useState([])
 
-    useEffect(() => {
-		//Write your get/fetch here
-		axios.get(`http://localhost:8000/foodtrucks/${id}`)
-            .then((res) => {
-                setReviewList(res.data.reviews)
-            })
-	}, [id, reviewList]);
-
-    // delete review
-    const handleDelete = (reviewId) => {
-        // axios.delete(`http://localhost:8000/reviews/${id}/${reviewId}`)
-        axios({method:'delete',
-            url:`http://localhost:8000/reviews/${id}/${reviewId}`,
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}` 
-            }
-        })
-        .then ((res) => {
-            console.log(res)
-        })
-    }
+    // const getReviews = useCallback(() => {
+    //     axios.get(`http://localhost:8000/foodtrucks/${id}`)
+    //     .then((res) => {
+    //         setReviewList(res.data.reviews)
+    //     })
+    // }, [reviewList])
     
+    // useEffect(() => {
+	// 	getReviews()
+	// }, [getReviews]);
+    
+    useEffect(() => {
+        axios.get(`http://localhost:8000/foodtrucks/${id}`)
+        .then((res) => {
+            setReviewList(res.data.reviews)
+        })
+    }, [id])
+
     return (
         <div>
             {localStorage.getItem('id') ?
@@ -45,7 +42,7 @@ const Reviews = () => {
                     {review.author.toString() === localStorage.getItem('id') ? 
                         <div className='edit-delete'>
                             <div className="del-review">
-                                <button type="button" onClick={() => handleDelete(review._id)}>Delete</button>
+                                <DeleteReview foodTruckId={id} review={review}/>
                             </div>
                             <div className='edit-review'>
                                 <EditReviewForm review ={review}/>
