@@ -80,7 +80,7 @@ const Register = () => {
             await axios({
                 method: 'post',
                 url: 'https://young-anchorage-22001.herokuapp.com/users/signup',
-                data: newUser
+                data: registerUser
             })
             .then((res) => {
                 if (res.status === 201) setSuccess(true)
@@ -119,7 +119,7 @@ const Register = () => {
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
                  />
-                <p className={userFocus && user && !validName ? "shown text-red-300" : "hidden"}>
+                <p className={userFocus && user && !validName ? "shown text-red-300 text-sm" : "hidden"}>
                             4 to 24 characters.<br />
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
