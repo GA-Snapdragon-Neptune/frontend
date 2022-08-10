@@ -70,7 +70,6 @@ const Map = ({ foodTruckList }) => {
   }, [])
 
 
-  //function to pan map to search input
   //useCallback so react only creates one function
   const panTo = useCallback(({ lat, lng }) => {
     //access googlemap ref

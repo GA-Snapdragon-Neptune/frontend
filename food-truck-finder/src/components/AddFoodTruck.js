@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import './addfoodtruck.css'
 
 const AddFoodTruck = () => {
     const navigate = useNavigate();
@@ -49,7 +48,7 @@ const AddFoodTruck = () => {
         setNewFoodTruck({ ...newFoodTruck, menu: menus });
 		axios({
             method: 'post',
-            url:`http://localhost:8000/foodtrucks`,
+            url:`https://young-anchorage-22001.herokuapp.com/foodtrucks`,
             data: newFoodTruck,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` 

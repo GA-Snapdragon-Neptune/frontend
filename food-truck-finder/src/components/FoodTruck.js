@@ -1,51 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Reviews from './Reviews';
 import Menu from './Menu'
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import pinkfoodtruck from '../assets/pinkfoodtruck.jpg'
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
-import './foodtruck.css'
 
 const FoodTruck = () => {
     const navigate = useNavigate();
     const { id } = useParams()
-
     const [foodTruck, setFoodTruck] = useState({})
+    //check if the user is food truck owner, then render food truck settings
+    // const [isOwner, setIsOwner] = useState(false)
+    let avgRating = useRef(null)
+    const [rating, setRating] = useState(avgRating.current);
 
     //get all food truck data, only renders when [id] has changed
     useEffect(() => {
 		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
             .then((res) => {
                 setFoodTruck(res.data)
+                avgRating.current = res.data.ratings.reduce((a,b) => a+b,0)/res.data.ratings.length;
+                setRating(avgRating.current)
             })
     }, [id]);
     
     //delete a foodtruck, navigate back to food trucks list
     const handleDelete = () => {
-		axios.delete(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
-			.then((res) => {
-			console.log(`${res.data} was deleted`)
-		})
+        axios({
+            method: 'delete',
+            url:`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+            .then((res) => {
+            console.log(`${res.data} was deleted`)
+        })
 		navigate('/foodtrucks');
     };
 
-    //check if the user is food truck owner, then render food truck settings
-    const [isOwner, setIsOwner] = useState(true)
     const [edit, setEdit] = useState(false)
-
-
     //edit a food truck, set Edit state to false
     const handleEdit = (event) => {
 		event.preventDefault();
-        axios.put(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`, foodTruck)
+        axios({
+            method: 'put',
+            url: `https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`, 
+            data: foodTruck,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
             .then((res) => {
                 setEdit(false)
             })
     };
-    
-
     //set edit state to true when clicking edit button
     const editFoodTruck = (e) => {
         e.preventDefault()
@@ -93,7 +106,7 @@ const FoodTruck = () => {
     return (
         <div className='h-full w-full'>
             
-            <nav className='bg-white flex justify-between items-center h-14 w-screen mx-auto px-2 text-black shadow-md z-50'>
+            <nav className='bg-[#7ed957] flex justify-between items-center h-12 w-screen mx-auto px-2 text-black shadow-md z-50'>
                 <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
 
                 <p className='font-extrabold text-xl'>GRUBTRUCK</p>
@@ -109,12 +122,13 @@ const FoodTruck = () => {
             {/* md:mt-20 mt-[-2rem] max-w-xl md:w-full h-auto  */}
                 <div className='bg-white z-20 rounded-3xl shadow-xl pb-20 pt-5 px-3 md:px-5 w-full md:mt-10 h-screen'>
                 
-                {!edit && isOwner ? 
+                {!edit && !(foodTruck.owner === localStorage.getItem('id')) ? 
                     <div className='px-4 py-4'>
                         <h1 className='text-3xl font-bold text-[#7ed957]'>{foodTruck.name}</h1>
                         <ul className='text-md'>
                             <li>{foodTruck.location}</li>
-                            <li>star rating:</li>
+                            <Typography component="legend">Star Rating:</Typography>
+                            <Rating name="read-only" value={rating} readOnly />
                             <li>hours:</li> 
                         </ul>
                     </div>
@@ -148,7 +162,7 @@ const FoodTruck = () => {
                     
                 <div>
 
-                    {isOwner ?
+                    {(foodTruck.owner === localStorage.getItem('id')) ?
                         <div className='my-5'>
                             <button onClick={editFoodTruck} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 mx-5 rounded'>edit foodtruck</button>
                             <button onClick={checkForDelete} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 rounded'>delete foodtruck</button>

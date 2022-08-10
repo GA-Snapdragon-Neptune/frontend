@@ -3,6 +3,7 @@ import TruckList from './components/TruckList';
 import FoodTruck from './components/FoodTruck'
 import Register from './components/Register';
 import Login from './components/Login';
+import UserOld from './components/UserOld';
 import User from './components/User';
 import { Routes, Route } from 'react-router-dom';
 import Welcome from './components/Welcome';

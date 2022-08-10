@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './menu.css'
 import food from '../assets/food.jpg'
 
 const Menu = () => {
