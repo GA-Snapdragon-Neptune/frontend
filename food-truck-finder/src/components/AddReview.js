@@ -4,7 +4,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
 
-const AddReview = ({id}) => {
+const AddReview = ({id, changeCount, setChangeCount}) => {
     const [rating, setRating] = useState(5);
     const initialReviewState = {
         title: '',
@@ -28,6 +28,7 @@ const AddReview = ({id}) => {
         })
         .then(() => {
             // navigate(`/foodtrucks/${id}`)
+            setChangeCount(changeCount + 1)
         })
         axios({
             method: 'put',
