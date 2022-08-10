@@ -61,55 +61,73 @@ const AddFoodTruck = () => {
 		)
     };
     
+    const [visible, setIsVisible] = useState(false)
 
 
     return (
-        <div className='flex flex-col justify-center items-center'>
-            <h1>add a food truck</h1>
-            <form className='add-truck-form'>
-                <label htmlFor='name'>Food Truck Name</label>
+        <div>
+            <h1 onClick={() => setIsVisible(!visible)} className='cursor-pointer font-bold text-left my-5 border-b w-3/4'>Add a Food Truck</h1>
+            {visible ? 
+            <>
+            <form>
+                <label htmlFor='name' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Food Truck Name</label>
                 <input
+                    className='border mb-5'
                     onChange={handleChange}
                     id='name'
-                    placeholder='Food Truck Name'
+                    // placeholder='Food Truck Name'
                     value={newFoodTruck.name}
                 />
-                <label htmlFor='location'>Location</label>
-                <input
+                <label htmlFor='location' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Location</label>
+                        <input
+                            className='border'
                     onChange={handleChange}
                     id='location'
-                    placeholder='Enter address'
+                    placeholder='Enter valid address'
                     value={newFoodTruck.location}
                 />
-                <label>Menu Item</label>
+
                 {menus.map((menu, index) => {
                     return (
                         <div key={index}>
+                            <label className='mt-5 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Item Name</label>
                             <input
+                                className='border'
                                 name='name'
                                 placeholder='Name'
                                 value={menu.name}
                                 onChange={e => handleMenuChange(e, index)}
                                 />
+                                <label className='mt-5 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Item Price</label>
                             <input
+                                className='border'
                                 name='price'
                                 placeholder='Price'
                                 value={menu.price}
                                 onChange={e => handleMenuChange(e, index)}
                                 />
+                                <label className='mt-5 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Description</label>
                             <input
+                                className='border'
                                 name='description'
                                 placeholder='Description'
                                 value={menu.description}
                                 onChange={e => handleMenuChange(e, index)}
                                 />
-                            <button onClick={() => removeFields(index)}>Remove</button>
+                            <button onClick={() => removeFields(index)} className='mx-5 flex-shrink-0 bg-red-500 hover:bg-red-700 text-sm  text-white py-1 px-2 rounded sm:mt-5 '>- Remove Menu Item</button>
                         </div>
                     )
                 })}
             </form>
-            <button onClick={addFields}>Add Menu Item</button>
-            <button type='submit' onClick={handleSubmit}>Submit</button>
+            <button onClick={addFields} className='mt-5 flex-shrink-0 bg-white border text-sm py-1 px-2 rounded'> + Add Menu Item</button>
+            <div className='mt-5'>
+                    <button type='submit' onClick={handleSubmit} className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 rounded'>Submit New Food Truck</button>
+                    <br></br>
+                        <button type='submit' onClick={() => setIsVisible(!visible)} className='mt-3 flex-shrink-0 bg-black hover:bg-teal-700 text-sm text-white py-1 px-2 rounded'>Cancel</button>
+            </div>
+                
+            </>
+        : null }
         </div>
     );
 };
