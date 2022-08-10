@@ -66,7 +66,7 @@ const AddFoodTruck = () => {
 
     return (
         <div>
-            <h1 onClick={() => setIsVisible(!visible)} className='cursor-pointer font-bold text-left my-5 border-b'>Add a Food Truck</h1>
+            <h1 onClick={() => setIsVisible(!visible)} className='cursor-pointer font-bold text-left my-5 border-b w-3/4'>Add a Food Truck</h1>
             {visible ? 
             <>
             <form>

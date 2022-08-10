@@ -33,7 +33,9 @@ const FoodTruck = () => {
 
     //check if the user is food truck owner, then render food truck settings
     const [isOwner, setIsOwner] = useState(true)
-    const [edit, setEdit] = useState(true)
+    const [edit, setEdit] = useState(false)
+
+
     //edit a food truck, set Edit state to false
     const handleEdit = (event) => {
 		event.preventDefault();
@@ -43,10 +45,15 @@ const FoodTruck = () => {
             })
     };
     
+
     //set edit state to true when clicking edit button
     const editFoodTruck = (e) => {
         e.preventDefault()
-        setEdit(true)
+        setEdit(!edit)
+    }
+
+    const exitEdit = () => {
+        setEdit(!edit)
     }
 
     //setfoodtruck state to new input on value change
@@ -76,11 +83,11 @@ const FoodTruck = () => {
     const [checkDelete, setCheckDelete] = useState(false)
 
     const checkForDelete = () => {
-        setCheckDelete(true)
+        setCheckDelete(!checkDelete)
     }
 
     const exitDelete = () => {
-        setCheckDelete(false)
+        setCheckDelete(!checkDelete)
     }
     
     return (
@@ -99,11 +106,12 @@ const FoodTruck = () => {
                 <img src={pinkfoodtruck} alt='pink food truck' className='mx-auto -z-10' />
             </div>
 
-                <div className='bg-white md:mt-20 mt-[-2rem] max-w-xl md:w-full h-auto z-20 rounded-3xl shadow-xl pb-20'>
+            {/* md:mt-20 mt-[-2rem] max-w-xl md:w-full h-auto  */}
+                <div className='bg-white z-20 rounded-3xl shadow-xl pb-20 pt-5 px-3 md:px-5 w-full md:mt-10 h-screen'>
                 
-                {!edit && !isOwner ? 
+                {!edit && isOwner ? 
                     <div className='px-4 py-4'>
-                        <h1 className='text-3xl font-bold'>{foodTruck.name}</h1>
+                        <h1 className='text-3xl font-bold text-[#7ed957]'>{foodTruck.name}</h1>
                         <ul className='text-md'>
                             <li>{foodTruck.location}</li>
                             <li>star rating:</li>
@@ -113,13 +121,19 @@ const FoodTruck = () => {
                 : 
 
                     <form onSubmit={handleEdit}>
-                        <h1><input
+                            <h1>
+                            <label htmlFor='name' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0'>Edit name</label>
+                                <input
+                            className='border'
                             type='text'
                             id='name'
                             placeholder={foodTruck.name}
                             onChange={handleChange} /></h1>
                         <ul>
-                            <li><input
+                                <li>
+                                <label htmlFor='location' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0 mt-2'>Edit Address</label>
+                                    <input
+                                        className='border'
                                 type='text'
                                 id='location'
                                 placeholder={foodTruck.location}
@@ -127,7 +141,7 @@ const FoodTruck = () => {
                             <li>star rating:</li>
                             <li>hours:</li>
                         </ul>
-                        <button>Submit changes</button>
+                        <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 rounded'>Submit changes</button>
                     </form>
 
                     }
@@ -135,15 +149,15 @@ const FoodTruck = () => {
                 <div>
 
                     {isOwner ?
-                        <div>
-                            <button onClick={editFoodTruck}>edit foodtruck</button>
-                            <button onClick={checkForDelete}>delete foodtruck</button>
+                        <div className='my-5'>
+                            <button onClick={editFoodTruck} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 mx-5 rounded'>edit foodtruck</button>
+                            <button onClick={checkForDelete} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 rounded'>delete foodtruck</button>
                         </div> : null}
                     
                     {checkDelete ? <div>
-                        Are you sure you want to delete {foodTruck.name}?
-                        <button onClick={handleDelete}>confirm</button>
-                        <button onClick={exitDelete}>exit</button>
+                        <p className='text-md font-bold italic mt-5 mx-5'>Are you sure you want to delete {foodTruck.name}?</p>
+                        <button onClick={handleDelete} className='flex-shrink-0 bg-red-500 hover:bg-red-700 text-sm  text-white py-1 px-2 rounded mx-5'>confirm delete</button>
+                        <button onClick={exitDelete} className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-3 my-5 rounded'>exit</button>
                     </div> : null}
 
                 </div>

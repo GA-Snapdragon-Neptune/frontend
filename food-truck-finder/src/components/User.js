@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AddFoodTruck from "./AddFoodTruck";
 import logo from '../assets/Grubtruck.png'
+import { BiArrowBack } from 'react-icons/bi'
+import { Link } from 'react-router-dom'
 
 const User = () => {
     useEffect(() => {
@@ -81,14 +83,19 @@ const User = () => {
         })
     }
     return (
-        <div className='flex justify-center bg-[#7ed957] h-screen'>
-        <div className='shadow-xl rounded-lg bg-white my-10 mx-auto w-3/4 lg:w-1/2 h-5/6 fixed px-10 pb-20 overflow-auto'>
+    <>
+            <nav className='flex justify-between items-center h-12 w-screen mx-auto px-2 bg-[#7ed957]'>
+                <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
+
+            </nav>
+        <div className='flex justify-center bg-[#7ed957] h-screen overflow-hidden'>
+        <div className='shadow-xl rounded-lg bg-white my-20 mx-auto w-3/4 lg:w-1/2 h-5/6 fixed px-10 pb-20 overflow-auto'>
             {deleted ? 
                 <p>Account Deleted</p>
                 :
                     <>
-                        <div className='h-32 top-0'></div>
-                <button onClick={checkForUpdate} className='font-bold border-b w-full text-left'>Edit User Info</button>
+
+                <button onClick={checkForUpdate} className='font-bold border-b w-3/4 text-left mt-10'>Edit User Info</button>
                     {checkUpdate ? 
                         <div>
                         {!updated ?
@@ -145,7 +152,7 @@ const User = () => {
                     null
                 }
                 <br></br>
-                <button onClick={checkForDelete} className='font-bold border-b w-full text-left'>Delete User</button>
+                <button onClick={checkForDelete} className='font-bold border-b w-full text-left w-3/4'>Delete User</button>
                 {checkDelete ? 
                     <div>
                         <p className='text-[#7ed957] text-md font-bold italic mb-5'>Are you sure you want to delete?</p>
@@ -159,8 +166,9 @@ const User = () => {
                 </>
             }
             </div>
-            <div className='w-full h-40 flex justify-center absolute top-0'><img src={logo} alt='logo' className=''/></div>
-        </div>
+            <div className='w-3/4 md:w-1/2 h-40 flex justify-center absolute top-0'><img src={logo} alt='logo' className=''/></div>
+            </div>
+        </>
     );
 };
 
