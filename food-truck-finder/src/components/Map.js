@@ -60,7 +60,6 @@ const Map = ({ foodTruckList }) => {
       getCoordinates()
     }, [getCoordinates])
 
-  
  
   //a reference to the map instance
   //accessible anywhere in code - state is to rerender, ref is to use state without re rendering

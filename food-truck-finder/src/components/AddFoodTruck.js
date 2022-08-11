@@ -102,6 +102,7 @@ const AddFoodTruck = () => {
                                 />
                                 <label className='mt-5 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Item Price</label>
                             <input
+                                type='number'
                                 className='border'
                                 name='price'
                                 placeholder='Price'
@@ -109,7 +110,7 @@ const AddFoodTruck = () => {
                                 onChange={e => handleMenuChange(e, index)}
                                 />
                                 <label className='mt-5 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Description</label>
-                            <input
+                            <textarea
                                 className='border'
                                 name='description'
                                 placeholder='Description'
