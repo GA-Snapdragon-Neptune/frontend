@@ -130,7 +130,7 @@ const Map = () => {
             setSelected(null)
           }}>
               <div>
-                <Link to={`/foodtrucks/${selected.id}`} className='font-bold underline cursor-pointer'>{selected.name}</Link>
+                <Link to={`/foodtrucks/${selected._id}`} className='font-bold underline cursor-pointer'>{selected.name}</Link>
                 <p>{selected.location}</p>
                 <Rating name="read-only" value={selected.ratings.reduce((a,b) => a+b,0)/selected.ratings.length} readOnly />
             </div>
