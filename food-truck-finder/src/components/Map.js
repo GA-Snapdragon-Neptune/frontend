@@ -12,6 +12,7 @@ import {
 } from "use-places-autocomplete";
 import Rating from '@mui/material/Rating'
 import Locate from './Locate';
+import axios from 'axios';
 
   const mapContainerStyle = {
     width: '100vw',
@@ -28,7 +29,7 @@ import Locate from './Locate';
     zoomControl: true,
   }
 
-const Map = ({ foodTruckList }) => {
+const Map = () => {
 
     const [libraries] = useState(['places']);
     const {isLoaded, loadError} = useLoadScript({
@@ -39,26 +40,37 @@ const Map = ({ foodTruckList }) => {
   const [markers, setMarkers] = useState([])
   const [selected, setSelected] = useState(null)
   
-  //parse the addresses into coordinates to display on the map
-  const getCoordinates =
-  useCallback(() => {
-    foodTruckList.map( (foodtruck) => {
-        const coordinates = {
-              address: foodtruck.location
-        }
-        getGeocode(coordinates)
-      
-            .then((results) => {
-              const { lat, lng } = getLatLng(results[0]);
-      setMarkers(current => [...current, { name: foodtruck.name, address: foodtruck.location, id: foodtruck._id, ratings: foodtruck.ratings, lat, lng }])
-        })
-    })
-
-  }, [foodTruckList]);
-
   useEffect(() => {
-      getCoordinates()
-    }, [getCoordinates])
+		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/`)
+            .then((res) => {
+                setMarkers(res.data)
+              
+            })
+    }, []);
+
+  //getGeocode has a query limit of 10 requests per second, in this implementation, it is requesting the number of food trucks in the state array which is greater than 10. It will not render more than 10 items. To debug this, addresses must be geocoded when posting to the foodtruck DB to add a coordinates property to each foodtruck. From there, markers can be set by calling an axios request to DB and mapping over the results array. 
+
+
+  //parse the addresses into coordinates to display on the map
+  // const getCoordinates =
+  // useCallback(() => {
+  //   foodTruckList.map( (foodtruck) => {
+  //       const coordinates = {
+  //             address: foodtruck.location
+  //       }
+  //       getGeocode(coordinates)
+      
+  //           .then((results) => {
+  //             const { lat, lng } = getLatLng(results[0]);
+  //     setMarkers(current => [...current, { name: foodtruck.name, address: foodtruck.location, id: foodtruck._id, ratings: foodtruck.ratings, lat, lng }])
+  //       })
+  //   })
+
+  // }, [foodTruckList]);
+
+  // useEffect(() => {
+  //     getCoordinates()
+  //   }, [getCoordinates])
 
  
   //a reference to the map instance
@@ -91,10 +103,11 @@ const Map = ({ foodTruckList }) => {
                 onLoad={onMapLoad}
             >
  
-                {markers.map((marker, index) => (
+          {markers.map((marker, index) => (
+            marker.coordinate ?
                     <MarkerF
                         key={index}
-                        position={{ lat: marker.lat, lng: marker.lng }}
+                        position={{ lat: marker.coordinate.lat, lng: marker.coordinate.lng }}
                         icon={{
                             url: '/Grubtruck (1).svg',
                             origin: new window.google.maps.Point(30, 30),
@@ -104,13 +117,15 @@ const Map = ({ foodTruckList }) => {
                     onClick={() => {
                       setSelected(marker)
                       
-                  }}
-                    />
+                    }}
+              
+              />
+              : null 
                 ))}
-          
+
             {selected ? (
             <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
+            position={{ lat: selected.coordinate.lat, lng: selected.coordinate.lng }}
             onCloseClick={() => {
             setSelected(null)
           }}>
