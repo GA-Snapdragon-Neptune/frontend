@@ -10,9 +10,6 @@ const Welcome = () => {
             <Link to='/login' className='bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-8 mb-5 border rounded-lg'>Login</Link>
             <Link to='/foodtrucks' className='text-sm mt-5'>continue as a guest</Link>
             </div>
-            <footer className='fixed bottom-0'>
-                <p className='text-xs text-center'>developed by <br></br>Luxe Hahn, Kenny U, Taylor Sturgill, and Kenan Kong</p>
-            </footer>
         </div>
     );
 };
