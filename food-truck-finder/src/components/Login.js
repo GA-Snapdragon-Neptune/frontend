@@ -55,7 +55,7 @@ const Login = () => {
                     <>
                     <div className='flex flex-col justify-center items-center w-3/4 md:w-1/4 h-3/4 mt-20 shadow-lg rounded-lg bg-white'>
                     <h1 className='font-bold text-2xl mb-20'>Log In</h1>
-                        {errMsg && <p className='text-red-600'>{errMsg}</p> }
+                        {errMsg && <p className='text-red-600 text-sm font-bold lg:text-lg text-center absolute top-0'>{errMsg}</p> }
                         <form onSubmit={handleSubmit} className='w-3/4 h-1/2 bg-white flex flex-col '>
                             <label htmlFor='username' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Username: </label>
                             <input

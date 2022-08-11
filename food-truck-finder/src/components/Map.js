@@ -39,6 +39,10 @@ const Map = ({ foodTruckList }) => {
   const [markers, setMarkers] = useState([])
   const [selected, setSelected] = useState(null)
   
+
+  //getGeocode has a query limit of 10 requests per second, in this implementation, it is requesting the number of food trucks in the state array which is greater than 10. It will not render more than 10 items. To debug this, addresses must be geocoded when posting to the foodtruck DB to add a coordinates property to each foodtruck. From there, markers can be set by calling an axios request to DB and mapping over the results array. 
+
+
   //parse the addresses into coordinates to display on the map
   const getCoordinates =
   useCallback(() => {
