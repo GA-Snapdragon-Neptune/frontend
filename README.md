@@ -3,7 +3,7 @@ Are you a business owner or love going to food truck to eat? Want to add your ow
 
 ## Grub Truck Goal
 GrubTruck is a full-stack MERN app that creates a streamlined relationship between business owner and users. Our platform allows business owners to create, edit and delete their food truck and menu. Guests can browse through the food trucks near them for their menu and registered users can write reviews about the food they recently.
-![Modern App Download Promotion Facebook Post](https://user-images.githubusercontent.com/104602440/184175921-bd91fa97-44a7-417f-aae2-94fa22fd994d.png)
+![Modern App Download Promotion Facebook Post](https://user-images.githubusercontent.com/104602440/184176089-37ce1437-3eea-4451-b564-cb17314a0fa7.png)
 
 # Grub Truck Group Members
 Luxe Hahn
