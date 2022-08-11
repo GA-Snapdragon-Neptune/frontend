@@ -13,10 +13,11 @@ const FoodTruck = () => {
     const navigate = useNavigate();
     const { id } = useParams()
     const [foodTruck, setFoodTruck] = useState({})
-    //check if the user is food truck owner, then render food truck settings
-    // const [isOwner, setIsOwner] = useState(false)
+
+
     let avgRating = useRef(null)
     const [rating, setRating] = useState(avgRating.current);
+
 
     //get all food truck data, only renders when [id] has changed
     useEffect(() => {
@@ -110,7 +111,7 @@ const FoodTruck = () => {
             <nav className='bg-[#7ed957] flex justify-between items-center h-12 w-screen mx-auto px-2 text-black shadow-md z-50'>
                 <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
 
-                <p className='font-extrabold text-xl'>GRUBTRUCK</p>
+                <Link to='/foodtrucks' className='font-extrabold text-xl'>GRUBTRUCK</Link>
 
                 <Link to='/user'><BiUserCircle className='text-3xl' /></Link>
             </nav>
@@ -127,10 +128,11 @@ const FoodTruck = () => {
                     <div className='px-4 py-4'>
                         <h1 className='text-3xl font-bold text-[#7ed957]'>{foodTruck.name}</h1>
                         <ul className='text-md'>
-                            <li>{foodTruck.location}</li>
-                            <Typography component="legend">Star Rating:</Typography>
+                                <li>{foodTruck.location}</li>
+                                <li>555-555-5555</li>
+                            <Typography component="legend"></Typography>
                             <Rating name="read-only" value={rating} readOnly />
-                            <li>hours:</li> 
+                            {/* <li>hours:</li>  */}
                         </ul>
                     </div>
                 : 
@@ -154,9 +156,9 @@ const FoodTruck = () => {
                                 placeholder={foodTruck.location}
                                 onChange={handleChange} /></li>
                             <li>star rating:</li>
-                            <li>hours:</li>
+                            {/* <li>hours:</li> */}
                         </ul>
-                        <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm  text-white py-1 px-2 rounded' onClick={() => setEdit(false)}>Submit changes</button>
+                        <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm py-1 px-2 rounded' onClick={() => setEdit(false)}>Submit changes</button>
                     </form>
 
                     }

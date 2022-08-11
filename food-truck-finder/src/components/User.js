@@ -82,10 +82,11 @@ const User = () => {
         <>
             <nav className='flex justify-between items-center h-12 w-screen mx-auto px-2 bg-[#7ed957]'>
                 <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
+                <Link to='/foodtrucks' className='font-extrabold text-xl z-50'><img src={logo} alt='logo' className='w-28 mt-4'/></Link>
 
             </nav>
             <div className='flex justify-center bg-[#7ed957] h-screen overflow-hidden'>
-        <div className='shadow-xl rounded-lg bg-white my-20 mx-auto w-3/4 lg:w-1/2 h-5/6 fixed px-10 pb-20 overflow-auto'>
+        <div className='shadow-xl rounded-lg bg-white my-5 mx-auto w-3/4 lg:w-1/2 h-5/6 fixed px-10 pb-20 overflow-auto'>
             {localStorage.getItem('id') ? 
                 <>
                     {deleted ? 
@@ -174,7 +175,6 @@ const User = () => {
                 </div>
                     }
                     </div>
-                <div className='w-3/4 md:w-1/2 h-40 flex justify-center absolute top-0'><img src={logo} alt='logo' className=''/></div>
             </div>
         </>
     );

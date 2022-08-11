@@ -102,7 +102,7 @@ const Register = () => {
 
     return (
         <div className='flex flex-col items-center bg-[#7ed957] h-screen'>
-            <p id="errMsg" ref={errRef} className={errMsg ? "shown text-red-300" : "hidden"}>{errMsg}</p>
+            <div id="errMsg" ref={errRef} className={errMsg ? "shown text-red-500 text-xs" : "hidden"}>{errMsg}</div>
             <div className='flex flex-col justify-center items-center w-3/4 md:w-1/4 h-3/4 mt-20 shadow-lg rounded-lg bg-white'>
             <h1 className='font-bold text-2xl mb-20'>Sign Up</h1>
             <form onSubmit={handleSubmit} className='w-3/4 h-1/2 bg-white flex flex-col'>
@@ -119,10 +119,10 @@ const Register = () => {
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
                  />
-                <p className={userFocus && user && !validName ? "shown text-red-300 text-sm" : "hidden"}>
+                <p className={userFocus && user && !validName ? "shown text-red-500 text-xs absolute z-50 bg-white mt-14" : "hidden"}>
                             4 to 24 characters.<br />
                             Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
+                            Only underscores and hyphens allowed.
                 </p>
                 <label htmlFor='email' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Email: </label>
                 <input
@@ -145,7 +145,7 @@ const Register = () => {
                     onFocus={() => setPwdFocus(true)}
                     onBlur={() => setPwdFocus(false)}
                 />
-                <p className={pwdFocus && !validPwd ? "shown text-red-300" : "hidden"}>
+                <p className={pwdFocus && !validPwd ? "shown text-red-500 text-xs absolute z-50 bg-white mt-40" : "hidden"}>
                             8 to 24 characters.<br />
                             Must include uppercase and lowercase letters, <br />
                             a number and a special character.<br />
@@ -162,7 +162,7 @@ const Register = () => {
                     onFocus={() => setMatchFocus(true)}
                     onBlur={() => setMatchFocus(false)}
                 />
-                <p className={matchFocus && !validMatch ? "shown text-red-300" : "hidden"}> 
+                <p className={matchFocus && !validMatch ? "shown text-red-500 text-xs absolute z-50 bg-white mt-52" : "hidden"}> 
                     Must match the first password input field.
                 </p>
                 <br></br>
@@ -176,14 +176,14 @@ const Register = () => {
                 <Link to='/foodtrucks' className='text-sm mt-20'>continue as guest</Link>
         </div>
            {success &&
-                <>
+                <div className='absolute top-0 text-center'>
                     <p>Successfully Registered!</p>
-                    <Link to="/login">Sign In</Link>
-                </>
+                    <Link to="/login" className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-3 my-5 rounded'>continue to sign in</Link>
+                </div>
             }
             <div className='mt-5 text-center'>
                 <h1>Returning User?</h1>
-                <Link to="/login" className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-3 my-5 rounded'>Sign In</Link>
+                <Link to="/login">Sign In</Link>
             </div>
         </div>
     );

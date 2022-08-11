@@ -42,8 +42,9 @@ const AddReview = ({id, changeCount, setChangeCount}) => {
 	};
 
     return (
-            <form className="flex flex-col">
-                <Typography component="legend">Rating</Typography>
+        <form className="flex flex-col border p-5 mb-5">
+            <p>leave a review!</p>
+                <Typography component="legend" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'></Typography>
                 <Rating
                     name="rating-controlled"
                     value={rating}
@@ -51,24 +52,23 @@ const AddReview = ({id, changeCount, setChangeCount}) => {
                         setRating(newValue);
                     }}
                 />
-                <label htmlFor="title">Review Title</label>
+                <label htmlFor="title" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Review Title</label>
                 <input 
-                    className="title-box" 
-                    placeholder="Review Title"
+                    className="border" 
                     id="title"
                     value={myReview.title}
                     onChange={handleChange}>
                 </input>
-                <label htmlFor="body">Body</label>
-                <input 
-                    className="body-box"
-                    placeholder="Review Content"
+                <label htmlFor="body" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Body</label>
+            <textarea
+                    type='text'
+                    className="border mb-5 h-16"
                     id="body"
                     value={myReview.body}
                     onChange={handleChange}>
-                </input>
+                </textarea>
                 <button 
-                    className="submit-button" 
+                    className="bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-2 mb-5 border rounded-lg w-1/4" 
                     onClick={handleSubmit}
                     onChange={(e) => setMyReview(e.target.value)}
                 >Submit Review</button>
