@@ -162,7 +162,7 @@ const Register = () => {
                     onFocus={() => setMatchFocus(true)}
                     onBlur={() => setMatchFocus(false)}
                 />
-                <p className={matchFocus && !validMatch ? "shown text-red-300" : "hidden"}> 
+                <p className={matchFocus && !validMatch ? "shown text-red-500 text-xs absolute z-50 bg-white mt-52" : "hidden"}> 
                     Must match the first password input field.
                 </p>
                 <br></br>
@@ -176,14 +176,14 @@ const Register = () => {
                 <Link to='/foodtrucks' className='text-sm mt-20'>continue as guest</Link>
         </div>
            {success &&
-                <>
+                <div className='absolute top-0 text-center'>
                     <p>Successfully Registered!</p>
-                    <Link to="/login">Sign In</Link>
-                </>
+                    <Link to="/login" className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-3 my-5 rounded'>continue to sign in</Link>
+                </div>
             }
             <div className='mt-5 text-center'>
                 <h1>Returning User?</h1>
-                <Link to="/login" className='flex-shrink-0 bg-black hover:bg-teal-700 text-sm  text-white py-1 px-3 my-5 rounded'>Sign In</Link>
+                <Link to="/login">Sign In</Link>
             </div>
         </div>
     );
