@@ -10,7 +10,7 @@ const Reviews = () => {
     const { id } = useParams()
     const [reviewList, setReviewList] = useState([])
     const [changeCount, setChangeCount] = useState(0)
-    
+
     useEffect(() => {
         const fetchData = async () => {
             await axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}`)
@@ -22,6 +22,7 @@ const Reviews = () => {
             .catch(console.error)
     }, [id, changeCount])
 
+   
     return (
         <div className='h-3/5 overflow-auto'>
         {localStorage.getItem('id') ?

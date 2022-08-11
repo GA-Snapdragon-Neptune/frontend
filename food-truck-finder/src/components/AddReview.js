@@ -63,7 +63,7 @@ const AddReview = ({id, changeCount, setChangeCount}) => {
                     onChange={handleChange}>
                 </textarea>
                 <button 
-                    className="bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-2 mb-5 border rounded-lg w-1/4" 
+                    className="bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-2 mb-5 border rounded-lg" 
                     onClick={handleSubmit}
                     onChange={(e) => setMyReview(e.target.value)}
                 >Submit Review</button>

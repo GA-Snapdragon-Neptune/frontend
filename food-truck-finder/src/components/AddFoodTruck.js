@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {
+    getGeocode,
+    getLatLng,
+  } from "use-places-autocomplete";
 
+//   getGeocode(coordinates)
+      
+//   .then((results) => {
+//     const { lat, lng } = getLatLng(results[0]);
+//       setMarkers(current => [...current, { name: foodtruck.name, address: foodtruck.location, id: foodtruck._id, ratings: foodtruck.ratings, lat, lng }])
+      
 const AddFoodTruck = () => {
     const navigate = useNavigate();
     const [menus, setMenus] = useState([
@@ -46,9 +56,24 @@ const AddFoodTruck = () => {
         setMenus(data)
     }
 
+    const [update, setUpdate] = useState([])
     
 	const handleSubmit = (event) => {
-		event.preventDefault();
+        event.preventDefault();
+        const location = {
+            address: newFoodTruck.location
+        }
+
+        getGeocode(location)
+            .then((res) => {
+                const { lat, lng } = getLatLng(res[0]);
+                console.log(newFoodTruck)
+                console.log({ lat, lng })
+                setUpdate(newFoodTruck)
+                console.log(update)
+        })
+
+
 		axios({
             method: 'post',
             url:`https://young-anchorage-22001.herokuapp.com/foodtrucks`,

@@ -6,16 +6,16 @@ import {
   MarkerF,
   InfoWindow,
 } from '@react-google-maps/api';
-import usePlacesAutocomplete, {
+import {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-
+import Rating from '@mui/material/Rating'
 import Locate from './Locate';
 
   const mapContainerStyle = {
     width: '100vw',
-    height: '75vh'
+    height: '70vh'
   }
 
   const center = {
@@ -38,22 +38,22 @@ const Map = ({ foodTruckList }) => {
     
   const [markers, setMarkers] = useState([])
   const [selected, setSelected] = useState(null)
-  const [name, setName] = useState([])
-
   
   //parse the addresses into coordinates to display on the map
   const getCoordinates =
   useCallback(() => {
-    foodTruckList.map((foodtruck) => {
+    foodTruckList.map( (foodtruck) => {
         const coordinates = {
               address: foodtruck.location
-            }
-            getGeocode(coordinates)
+        }
+        getGeocode(coordinates)
+      
             .then((results) => {
               const { lat, lng } = getLatLng(results[0]);
-      setMarkers(current => [...current, { name: foodtruck.name, address: foodtruck.location, id: foodtruck._id, lat, lng }])
+      setMarkers(current => [...current, { name: foodtruck.name, address: foodtruck.location, id: foodtruck._id, ratings: foodtruck.ratings, lat, lng }])
         })
-      })
+    })
+
   }, [foodTruckList]);
 
   useEffect(() => {
@@ -117,11 +117,13 @@ const Map = ({ foodTruckList }) => {
               <div>
                 <Link to={`/foodtrucks/${selected.id}`} className='font-bold underline cursor-pointer'>{selected.name}</Link>
                 <p>{selected.address}</p>
+                <Rating name="read-only" value={selected.ratings.reduce((a,b) => a+b,0)/selected.ratings.length} readOnly />
             </div>
           </InfoWindow>
           ) : null }
 
         </GoogleMap> 
+
 
         </div>
     );

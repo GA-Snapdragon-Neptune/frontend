@@ -16,6 +16,8 @@ const TruckList = () => {
             })
     }, []);
 
+    const austin = foodTruckList.includes('')
+
 
     return (
         <div>
@@ -25,7 +27,7 @@ const TruckList = () => {
                 <Link to='/foodtrucks' className='font-extrabold text-xl'>GRUBTRUCK</Link>
                 <Link to='/user'><BiUserCircle className='text-3xl' /></Link>
             </nav>
-            <h1 className='md:text-2xl font-bold text-center mt-3'>We are currently beta in Austin, TX, Los Angeles, CA, and Portland, OR!</h1>
+            <h1 className='md:text-2xl font-bold text-center mt-3 px-3'>We are currently beta in Austin, TX, Los Angeles, CA, and Portland, OR!</h1>
             <div className='flex justify-between overflow-auto'>
             {foodTruckList.map((foodtruck) => (
                     <Link to={foodtruck._id} key={foodtruck._id}>

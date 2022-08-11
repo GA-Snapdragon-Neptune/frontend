@@ -5,6 +5,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import pinkfoodtruck from '../assets/pinkfoodtruck.jpg'
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
+import { BsPencilSquare } from 'react-icons/bs'
 import Rating from '@mui/material/Rating';
 
 
@@ -59,15 +60,12 @@ const FoodTruck = () => {
                 setEdit(false)
             })
     };
-    //set edit state to true when clicking edit button
-    // const editFoodTruck = (e) => {
-    //     e.preventDefault()
-    //     setEdit(true)
-    // }
 
-    // const exitEdit = () => {
-    //     setEdit(!edit)
-    // }
+    // set edit state to true when clicking edit button
+    const editFoodTruck = (e) => {
+        e.preventDefault()
+        setEdit(!edit)
+    }
 
     //setfoodtruck state to new input on value change
     const handleChange = (event) => {
@@ -87,11 +85,6 @@ const FoodTruck = () => {
         setMenu(false)
         setReviews(true)
     }
-
-
-    //set state of checkdelete button to false
-    //when click 1st delete button, set checkdelete state to true which will render checkdelete confirmation modal
-    //on click confirm: call handledelete and navigate to food trucks page
 
     const [checkDelete, setCheckDelete] = useState(false)
 
@@ -120,22 +113,21 @@ const FoodTruck = () => {
                 <img src={pinkfoodtruck} alt='pink food truck' className='mx-auto -z-10' />
             </div>
 
-            {/* md:mt-20 mt-[-2rem] max-w-xl md:w-full h-auto  */}
+         
                 <div className='bg-white z-20 rounded-3xl shadow-xl pb-20 pt-5 px-3 md:px-5 w-full md:mt-10 h-screen'>
-                
-                {!edit && !(foodTruck.owner === localStorage.getItem('id')) ? 
+        
+                {!edit ? 
                     <div className='px-4 py-4'>
                         <h1 className='text-3xl font-bold text-[#7ed957]'>{foodTruck.name}</h1>
                         <ul className='text-md'>
                                 <li>{foodTruck.location}</li>
-                                <li>555-555-5555</li>
+                                <li className='text-sm'>555-555-5555</li>
                             <Rating name="read-only" value={rating} readOnly />
-                            {/* <li>hours:</li>  */}
                         </ul>
                     </div>
                 : 
 
-                    <form onSubmit={handleEdit}>
+                    <form onSubmit={handleEdit} className='px-4'>
                             <h1>
                             <label htmlFor='name' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0'>Edit name</label>
                                 <input
@@ -147,15 +139,15 @@ const FoodTruck = () => {
                         <ul>
                                 <li>
                                 <label htmlFor='location' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0 mt-2'>Edit Address</label>
-                                    <input
+                                    <textarea
                                         className='border'
                                 type='text'
                                 id='location'
                                 placeholder={foodTruck.location}
                                 onChange={handleChange} /></li>
-                            <li>555-555-5555</li>
+                            <li className='text-sm'>555-555-5555</li>
                             <Rating name="read-only" value={rating} readOnly />
-                            {/* <li>hours:</li> */}
+                          
                         </ul>
                         <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm py-1 px-2 rounded' onClick={() => setEdit(false)}>Submit Changes</button>
                     </form>
@@ -166,8 +158,8 @@ const FoodTruck = () => {
 
                     {(foodTruck.owner === localStorage.getItem('id')) ?
                         <div className='my-5'>
-                            {/* <button onClick={editFoodTruck} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 mx-5 rounded'>edit foodtruck</button> */}
-                            <button onClick={checkForDelete} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 rounded'>delete foodtruck</button>
+                            <button onClick={editFoodTruck} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 mx-5 rounded'>Edit Food Truck</button>
+                            <button onClick={checkForDelete} className='flex-shrink-0 bg-black text-sm  text-white py-1 px-2 rounded'>Delete Food Truck</button>
                         </div> : null}
                     
                     {checkDelete ? <div>

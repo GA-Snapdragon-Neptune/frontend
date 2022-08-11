@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import logo from '../assets/Grubtruck.png'
 
 const Login = () => {
     const [user, setUser] = useState({
@@ -48,6 +49,7 @@ const Login = () => {
                         <p className='font-bold text-2xl'>welcome <span className='text-[#7ed957]'>{user.username}!</span></p>
                         <Link to="/foodtrucks" className='bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-8 mb-5 border rounded-lg'>Enter</Link>
                     </div>
+                    <img src={logo} alt='grubtruck logo' className='w-56 mt-10'/>
                     </>
                 :
                     <>
