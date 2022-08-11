@@ -16,7 +16,7 @@ import axios from 'axios';
 
   const mapContainerStyle = {
     width: '100vw',
-    height: '70vh'
+    height: '80vh'
   }
 
   const center = {
@@ -97,7 +97,7 @@ const Map = () => {
           <Locate panTo={panTo} />
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
-                zoom={11}
+                zoom={5}
                 center={center}
                 options={options}
                 onLoad={onMapLoad}
