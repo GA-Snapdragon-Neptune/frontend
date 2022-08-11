@@ -30,7 +30,7 @@ const EditReviewForm = ({review, changeCount, setChangeCount}) => {
     } 
     return( 
         <>
-            <button type="button" onClick={editReview} className='bg-black text-sm text-white py-1 px-2 rounded'>Edit Review</button>
+            <button type="button" onClick={editReview} className='bg-black text-sm text-white my-2 py-1 px-2 rounded'>Edit Review</button>
             {edit ?
             <form className='flex flex-col'>
                 <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0' htmlFor="title">Edit Title</label>
@@ -42,15 +42,15 @@ const EditReviewForm = ({review, changeCount, setChangeCount}) => {
                     onChange={handleChange}>
                 </input>
                 <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0' htmlFor="body">Edit Body</label>
-                <input 
-                    className='border'
+                <textarea 
+                    className='border mb-5 h-16'
                     type='text'
                     id='body'
                     value={editedReview.body}
                     onChange={handleChange}
                     >
-                </input>
-                <button className='bg-black text-sm text-white py-1 px-2 mx-5 rounded w-36' type="button" onClick={() => handleEdit(review._id)}>Submit Changes</button>
+                </textarea>
+                <button className='bg-[#7ed957] text-sm text-white py-1 px-2 mx-5 rounded w-36' type="button" onClick={() => handleEdit(review._id)}>Submit Changes</button>
             </form>
             : null
             }

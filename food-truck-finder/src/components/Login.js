@@ -35,6 +35,10 @@ const Login = () => {
 
     };
 
+    const guestMode = () => {
+        localStorage.clear()
+    }
+
     return (
         <div className='flex flex-col items-center bg-[#7ed957] h-screen'>
             {success ?
@@ -47,9 +51,9 @@ const Login = () => {
                     </>
                 :
                     <>
-                        {errMsg && <p>{errMsg}</p> }
                     <div className='flex flex-col justify-center items-center w-3/4 md:w-1/4 h-3/4 mt-20 shadow-lg rounded-lg bg-white'>
                     <h1 className='font-bold text-2xl mb-20'>Log In</h1>
+                        {errMsg && <p className='text-red-600'>{errMsg}</p> }
                         <form onSubmit={handleSubmit} className='w-3/4 h-1/2 bg-white flex flex-col '>
                             <label htmlFor='username' className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Username: </label>
                             <input
@@ -82,7 +86,7 @@ const Login = () => {
                             <br></br>
                             <button className='bg-[#7ed957] shadow-lg flex-shrink-0 py-2 px-8 mb-5 border rounded-lg'>Sign In</button>
                         </form>
-                        <Link to='/foodtrucks' className='text-sm mt-20'>continue as guest</Link>
+                        <Link to='/foodtrucks' className='text-sm mt-20' onClick={guestMode}>continue as guest</Link>
                         </div>
                     <div className='mt-5 text-center'>
                     <p>

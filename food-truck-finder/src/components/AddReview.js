@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
 
 
 const AddReview = ({id, changeCount, setChangeCount}) => {
@@ -27,7 +26,6 @@ const AddReview = ({id, changeCount, setChangeCount}) => {
             }
         })
         .then(() => {
-            // navigate(`/foodtrucks/${id}`)
             setChangeCount(changeCount + 1)
         })
         axios({
@@ -35,16 +33,13 @@ const AddReview = ({id, changeCount, setChangeCount}) => {
             url:`https://young-anchorage-22001.herokuapp.com/foodtrucks/${id}/rating`,
             data: {rating: rating}
         })
-        .then((res)=> {
-            console.log(res)
-        })
-            setMyReview(initialReviewState)
+        .catch((err) => {console.log(err)})
+        setMyReview(initialReviewState)
 	};
 
     return (
         <form className="flex flex-col border p-5 mb-5">
             <p>leave a review!</p>
-                <Typography component="legend" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'></Typography>
                 <Rating
                     name="rating-controlled"
                     value={rating}
@@ -60,7 +55,7 @@ const AddReview = ({id, changeCount, setChangeCount}) => {
                     onChange={handleChange}>
                 </input>
                 <label htmlFor="body" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2'>Body</label>
-            <textarea
+                <textarea
                     type='text'
                     className="border mb-5 h-16"
                     id="body"

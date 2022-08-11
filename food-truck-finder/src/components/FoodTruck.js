@@ -6,7 +6,6 @@ import axios from 'axios';
 import pinkfoodtruck from '../assets/pinkfoodtruck.jpg'
 import { BiArrowBack, BiUserCircle } from 'react-icons/bi'
 import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
 
 
 const FoodTruck = () => {
@@ -61,14 +60,14 @@ const FoodTruck = () => {
             })
     };
     //set edit state to true when clicking edit button
-    const editFoodTruck = (e) => {
-        e.preventDefault()
-        setEdit(true)
-    }
+    // const editFoodTruck = (e) => {
+    //     e.preventDefault()
+    //     setEdit(true)
+    // }
 
-    const exitEdit = () => {
-        setEdit(!edit)
-    }
+    // const exitEdit = () => {
+    //     setEdit(!edit)
+    // }
 
     //setfoodtruck state to new input on value change
     const handleChange = (event) => {
@@ -130,7 +129,6 @@ const FoodTruck = () => {
                         <ul className='text-md'>
                                 <li>{foodTruck.location}</li>
                                 <li>555-555-5555</li>
-                            <Typography component="legend"></Typography>
                             <Rating name="read-only" value={rating} readOnly />
                             {/* <li>hours:</li>  */}
                         </ul>
@@ -155,10 +153,11 @@ const FoodTruck = () => {
                                 id='location'
                                 placeholder={foodTruck.location}
                                 onChange={handleChange} /></li>
-                            <li>star rating:</li>
+                            <li>555-555-5555</li>
+                            <Rating name="read-only" value={rating} readOnly />
                             {/* <li>hours:</li> */}
                         </ul>
-                        <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm py-1 px-2 rounded' onClick={() => setEdit(false)}>Submit changes</button>
+                        <button className='flex-shrink-0 bg-[#7ed957] hover:bg-teal-700 text-sm py-1 px-2 rounded' onClick={() => setEdit(false)}>Submit Changes</button>
                     </form>
 
                     }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import Map from './Map'
@@ -25,14 +25,14 @@ const TruckList = () => {
                 <Link to='/foodtrucks' className='font-extrabold text-xl'>GRUBTRUCK</Link>
                 <Link to='/user'><BiUserCircle className='text-3xl' /></Link>
             </nav>
-            <h1 className='md:text-2xl font-bold text-center mt-3'>We are currently in beta in Austin, TX, Los Angeles, CA, and Portland, OR!</h1>
+            <h1 className='md:text-2xl font-bold text-center mt-3'>We are currently beta in Austin, TX, Los Angeles, CA, and Portland, OR!</h1>
             <div className='flex justify-between overflow-auto'>
             {foodTruckList.map((foodtruck) => (
                     <Link to={foodtruck._id} key={foodtruck._id}>
                     <div className='bg-white my-5 mx-5 border rounded-lg shadow-md hover:scale-105 w-44 h-28 px-3 pt-2 mb-3'>
                         <h1 className='font-semibold leading-tight'>{foodtruck.name}</h1>
                         <p className='text-xs'>{foodtruck.location}</p>
-                        <Rating name="read-only" value={5} readOnly />
+                        <Rating name="read-only" value={foodtruck.ratings.reduce((a,b) => a+b,0)/foodtruck.ratings.length} readOnly />
                     </div>
                     </Link>
                 

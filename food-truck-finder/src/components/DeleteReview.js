@@ -21,7 +21,7 @@ const DeleteReview = ({foodTruckId, review, changeCount, setChangeCount}) => {
     }
     return(
         <div className="del-review">
-            <button type="button" onClick={checkForDelete} className='bg-black text-sm text-white py-1 px-2 rounded'>Delete Review</button>
+            <button type="button" onClick={checkForDelete} className='bg-black text-sm text-white py-1 px-2 my-2 rounded'>Delete Review</button>
             {checkDelete ? 
                 <div>
                 <p>Are you sure you want to delete ?</p>
