@@ -56,10 +56,12 @@ const AddFoodTruck = () => {
         setMenus(data)
     }
 
-    const [update, setUpdate] = useState([])
+    let newObj = newFoodTruck
     
 	const handleSubmit = (event) => {
         event.preventDefault();
+
+
         const location = {
             address: newFoodTruck.location
         }
@@ -67,25 +69,39 @@ const AddFoodTruck = () => {
         getGeocode(location)
             .then((res) => {
                 const { lat, lng } = getLatLng(res[0]);
-                console.log(newFoodTruck)
+                
                 console.log({ lat, lng })
-                setUpdate(newFoodTruck)
-                console.log(update)
+                newObj.coordinate = ({ lat: lat, lng: lng })
+                console.log(newObj)
+                axios({
+                    method: 'post',
+                    url:`https://young-anchorage-22001.herokuapp.com/foodtrucks`,
+                    data: newObj,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}` 
+                    }
+                })
+                    .then((res) => {
+                        navigate(`/foodtrucks/${res.data._id}`)
+                        console.log(res)
+                }
+                )
         })
 
 
-		axios({
-            method: 'post',
-            url:`https://young-anchorage-22001.herokuapp.com/foodtrucks`,
-            data: newFoodTruck,
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}` 
-            }
-        })
-            .then((res) => {
-                navigate(`/foodtrucks/${res.data._id}`)
-		}
-		)
+		// axios({
+        //     method: 'post',
+        //     url:`https://young-anchorage-22001.herokuapp.com/foodtrucks`,
+        //     data: newObj,
+        //     headers: {
+        //         Authorization: `Bearer ${localStorage.getItem('token')}` 
+        //     }
+        // })
+        //     .then((res) => {
+        //         navigate(`/foodtrucks/${res.data._id}`)
+        //         console.log(res)
+		// }
+		// )
     };
     
     const [visible, setIsVisible] = useState(false)

@@ -13,12 +13,11 @@ const TruckList = () => {
 		axios.get(`https://young-anchorage-22001.herokuapp.com/foodtrucks/`)
             .then((res) => {
                 setFoodTruckList(res.data)
+            
             })
     }, []);
 
-    const austin = foodTruckList.includes('')
-
-
+    
     return (
         <div>
             <nav className='bg-[#7ed957] flex justify-between items-center h-12 w-screen mx-auto px-2 text-black shadow-md z-50'>
@@ -42,7 +41,7 @@ const TruckList = () => {
         </div>
             
             <div>
-                <Map foodTruckList={foodTruckList}
+                <Map 
                     className='z-0' />
             </div>
         </div>
