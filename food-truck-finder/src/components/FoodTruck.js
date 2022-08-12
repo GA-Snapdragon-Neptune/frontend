@@ -100,7 +100,7 @@ const FoodTruck = () => {
     return (
         <div className='h-full w-full'>
             
-            <nav className='bg-[#7ed957] flex justify-between items-center h-12 w-screen mx-auto px-2 text-black shadow-md z-50'>
+            <nav className='bg-[#7ed957] flex justify-between items-center h-16 w-screen mx-auto px-2 text-black shadow-md z-50'>
                 <Link to='/foodtrucks'><BiArrowBack className='text-3xl' /></Link>
 
                 <Link to='/foodtrucks' className='font-extrabold text-xl'>GRUBTRUCK</Link>

@@ -100,7 +100,7 @@ const Register = () => {
 
     return (
         <div className='flex flex-col items-center bg-[#7ed957] h-screen'>
-            <div id="errMsg" ref={errRef} className={errMsg ? "shown text-red-500 text-xs" : "hidden"}>{errMsg}</div>
+            <div id="errMsg" ref={errRef} className={errMsg && !success ? "shown text-red-500 text-sm" : 'hidden' }>{errMsg}</div>
             <div className='flex flex-col justify-center items-center w-3/4 md:w-1/4 h-3/4 mt-20 shadow-lg rounded-lg bg-white'>
             <h1 className='font-bold text-2xl mb-20'>Sign Up</h1>
             <form onSubmit={handleSubmit} className='w-3/4 h-1/2 bg-white flex flex-col'>
